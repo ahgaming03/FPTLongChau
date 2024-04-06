@@ -4,6 +4,7 @@ using FPTLongChau.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FPTLongChau.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240406094838_ProductSupplierUpdateReationship")]
+    partial class ProductSupplierUpdateReationship
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -85,24 +88,6 @@ namespace FPTLongChau.Data.Migrations
                     b.ToTable("Customers");
                 });
 
-            modelBuilder.Entity("FPTLongChau.Models.DeliveryInformation", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("DeliveryInformation");
-                });
-
             modelBuilder.Entity("FPTLongChau.Models.Order", b =>
                 {
                     b.Property<string>("Id")
@@ -112,28 +97,12 @@ namespace FPTLongChau.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("DeliveryInformationId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("PayModeId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ShipModeId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<DateTime>("Time")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CustomerId");
-
-                    b.HasIndex("DeliveryInformationId");
-
-                    b.HasIndex("PayModeId");
-
-                    b.HasIndex("ShipModeId");
 
                     b.ToTable("Orders");
                 });
@@ -154,24 +123,6 @@ namespace FPTLongChau.Data.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("OrderDetails");
-                });
-
-            modelBuilder.Entity("FPTLongChau.Models.PayMode", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PayModes");
                 });
 
             modelBuilder.Entity("FPTLongChau.Models.Product", b =>
@@ -220,24 +171,6 @@ namespace FPTLongChau.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Ranks");
-                });
-
-            modelBuilder.Entity("FPTLongChau.Models.ShipMode", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ShipModes");
                 });
 
             modelBuilder.Entity("FPTLongChau.Models.Storage", b =>
@@ -544,27 +477,7 @@ namespace FPTLongChau.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FPTLongChau.Models.DeliveryInformation", "DeliveryInformation")
-                        .WithMany("Orders")
-                        .HasForeignKey("DeliveryInformationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("FPTLongChau.Models.PayMode", "PayMode")
-                        .WithMany("Orders")
-                        .HasForeignKey("PayModeId");
-
-                    b.HasOne("FPTLongChau.Models.ShipMode", "ShipMode")
-                        .WithMany("Orders")
-                        .HasForeignKey("ShipModeId");
-
                     b.Navigation("Customer");
-
-                    b.Navigation("DeliveryInformation");
-
-                    b.Navigation("PayMode");
-
-                    b.Navigation("ShipMode");
                 });
 
             modelBuilder.Entity("FPTLongChau.Models.OrderDetail", b =>
@@ -689,19 +602,9 @@ namespace FPTLongChau.Data.Migrations
                     b.Navigation("Products");
                 });
 
-            modelBuilder.Entity("FPTLongChau.Models.DeliveryInformation", b =>
-                {
-                    b.Navigation("Orders");
-                });
-
             modelBuilder.Entity("FPTLongChau.Models.Order", b =>
                 {
                     b.Navigation("OrderDetails");
-                });
-
-            modelBuilder.Entity("FPTLongChau.Models.PayMode", b =>
-                {
-                    b.Navigation("Orders");
                 });
 
             modelBuilder.Entity("FPTLongChau.Models.Product", b =>
@@ -712,11 +615,6 @@ namespace FPTLongChau.Data.Migrations
             modelBuilder.Entity("FPTLongChau.Models.Rank", b =>
                 {
                     b.Navigation("Customers");
-                });
-
-            modelBuilder.Entity("FPTLongChau.Models.ShipMode", b =>
-                {
-                    b.Navigation("Orders");
                 });
 
             modelBuilder.Entity("FPTLongChau.Models.Storage", b =>

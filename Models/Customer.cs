@@ -18,6 +18,7 @@ namespace FPTLongChau.Models
         public string PhoneNumber { get; set; }
         [EmailAddress]
         public string Email { get; set; }
+        public Rank Rank { get; set; }
 
 
 

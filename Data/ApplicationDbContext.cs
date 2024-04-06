@@ -12,5 +12,33 @@ namespace FPTLongChau.Data
         }
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<Rank> Ranks { get; set; }
+        public DbSet<Supplier> Suppliers { get; set; }
+        public DbSet<OrderDetail> OrderDetails { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<OrderDetail>()
+                .HasKey(od => new { od.OrderId, od.ProductId }); // Composite key
+
+            modelBuilder.Entity<OrderDetail>()
+                .HasOne(od => od.Order)
+                .WithMany(o => o.OrderDetails)
+                .HasForeignKey(od => od.OrderId);
+
+            modelBuilder.Entity<OrderDetail>()
+                .HasOne(od => od.Product)
+                .WithMany(p => p.OrderDetails)
+                .HasForeignKey(od => od.ProductId);
+        }
+        public DbSet<Unit> Units { get; set; }
+        public DbSet<Storage> Storages { get; set; }
+        public DbSet<ShipMode> ShipModes { get; set; }
+        public DbSet<DeliveryInformation> DeliveryInformation { get; set;}
+        public DbSet<PayMode> PayModes { get; set; }
+        //public DbSet<Admin> Admins { get; set; }
     }
 }
