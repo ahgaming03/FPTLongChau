@@ -6,11 +6,11 @@ namespace FPTLongChau.Models
 {
     public class OrderDetail
     {
-        public string ProductId { get; set; }
-        public string OrderId { get; set; }
-        public Product Product { get; set; } = null;
-        public Order Order { get; set; } = null;
-        public int Quantity { get; set; }
+        //public string ProductId { get; set; }
+        //public string OrderId { get; set; }
+        public Product Product { get; set; }
+        public Order Order { get; set; }
+        public int Quantity { get; set; } = 1;
 
     }
 }

@@ -4,12 +4,13 @@ namespace FPTLongChau.Models
 {
     public class Customer
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         [StringLength(50)]
         public string FirstName { get; set; }
         [StringLength(50)]
         public string LastName { get; set; }
         [Required]
+        [MinLength(5)]
         public string Username { get; set; }
         [Required]
         public string PasswordHash { get; set; }
