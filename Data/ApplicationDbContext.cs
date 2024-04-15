@@ -1,4 +1,5 @@
-﻿using FPTLongChau.Models;
+﻿using FPTLongChau.Areas.Admin.Models;
+using FPTLongChau.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,7 +13,7 @@ namespace FPTLongChau.Data
         }
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
-        public DbSet<Customer> Customers { get; set; }
+        public DbSet<ApplicationUser> Customers { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Rank> Ranks { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
@@ -39,6 +40,5 @@ namespace FPTLongChau.Data
         public DbSet<ShipMode> ShipModes { get; set; }
         public DbSet<DeliveryInformation> DeliveryInformation { get; set;}
         public DbSet<PayMode> PayModes { get; set; }
-        //public DbSet<Admin> Admins { get; set; }
     }
 }

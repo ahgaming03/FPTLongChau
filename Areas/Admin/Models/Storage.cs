@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace FPTLongChau.Models
+namespace FPTLongChau.Areas.Admin.Models
 {
     public class Storage
     {
@@ -8,7 +8,7 @@ namespace FPTLongChau.Models
         [Required]
         public int Quantity { get; set; }
         public DateTime Time { get; set; } = DateTime.Now;
-        public List<Product> Products { get; set; }
+        public List<Product>? Products { get; set; }
 
     }
 }

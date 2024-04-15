@@ -17,18 +17,18 @@ namespace FPTLongChau.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.0")
+                .HasAnnotation("ProductVersion", "8.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("FPTLongChau.Models.Category", b =>
+            modelBuilder.Entity("FPTLongChau.Areas.Admin.Models.Category", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
@@ -40,58 +40,13 @@ namespace FPTLongChau.Data.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("FPTLongChau.Models.Customer", b =>
+            modelBuilder.Entity("FPTLongChau.Areas.Admin.Models.DeliveryInformation", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("Birthday")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("PasswordHash")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
-
-                    b.Property<string>("RankId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RankId");
-
-                    b.ToTable("Customers");
-                });
-
-            modelBuilder.Entity("FPTLongChau.Models.DeliveryInformation", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
@@ -103,24 +58,23 @@ namespace FPTLongChau.Data.Migrations
                     b.ToTable("DeliveryInformation");
                 });
 
-            modelBuilder.Entity("FPTLongChau.Models.Order", b =>
+            modelBuilder.Entity("FPTLongChau.Areas.Admin.Models.Order", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("CustomerId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("DeliveryInformationId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("DeliveryInformationId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("PayModeId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("PayModeId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("ShipModeId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("ShipModeId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("Time")
                         .HasColumnType("datetime2");
@@ -138,13 +92,13 @@ namespace FPTLongChau.Data.Migrations
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("FPTLongChau.Models.OrderDetail", b =>
+            modelBuilder.Entity("FPTLongChau.Areas.Admin.Models.OrderDetail", b =>
                 {
-                    b.Property<string>("OrderId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("OrderId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("ProductId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
@@ -156,13 +110,13 @@ namespace FPTLongChau.Data.Migrations
                     b.ToTable("OrderDetails");
                 });
 
-            modelBuilder.Entity("FPTLongChau.Models.PayMode", b =>
+            modelBuilder.Entity("FPTLongChau.Areas.Admin.Models.PayMode", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
@@ -174,17 +128,16 @@ namespace FPTLongChau.Data.Migrations
                     b.ToTable("PayModes");
                 });
 
-            modelBuilder.Entity("FPTLongChau.Models.Product", b =>
+            modelBuilder.Entity("FPTLongChau.Areas.Admin.Models.Product", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("CategoryId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("CategoryId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("StorageId")
@@ -204,13 +157,13 @@ namespace FPTLongChau.Data.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("FPTLongChau.Models.Rank", b =>
+            modelBuilder.Entity("FPTLongChau.Areas.Admin.Models.Rank", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
@@ -222,13 +175,13 @@ namespace FPTLongChau.Data.Migrations
                     b.ToTable("Ranks");
                 });
 
-            modelBuilder.Entity("FPTLongChau.Models.ShipMode", b =>
+            modelBuilder.Entity("FPTLongChau.Areas.Admin.Models.ShipMode", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
@@ -240,7 +193,7 @@ namespace FPTLongChau.Data.Migrations
                     b.ToTable("ShipModes");
                 });
 
-            modelBuilder.Entity("FPTLongChau.Models.Storage", b =>
+            modelBuilder.Entity("FPTLongChau.Areas.Admin.Models.Storage", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -256,13 +209,13 @@ namespace FPTLongChau.Data.Migrations
                     b.ToTable("Storages");
                 });
 
-            modelBuilder.Entity("FPTLongChau.Models.Supplier", b =>
+            modelBuilder.Entity("FPTLongChau.Areas.Admin.Models.Supplier", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
@@ -274,16 +227,13 @@ namespace FPTLongChau.Data.Migrations
                     b.ToTable("Suppliers");
                 });
 
-            modelBuilder.Entity("FPTLongChau.Models.Unit", b =>
+            modelBuilder.Entity("FPTLongChau.Areas.Admin.Models.Unit", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
@@ -359,6 +309,11 @@ namespace FPTLongChau.Data.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasMaxLength(21)
+                        .HasColumnType("nvarchar(21)");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -410,6 +365,10 @@ namespace FPTLongChau.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -499,11 +458,11 @@ namespace FPTLongChau.Data.Migrations
 
             modelBuilder.Entity("ProductSupplier", b =>
                 {
-                    b.Property<string>("ProductsId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("ProductsId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("SuppliersId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("SuppliersId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("ProductsId", "SuppliersId");
 
@@ -514,11 +473,11 @@ namespace FPTLongChau.Data.Migrations
 
             modelBuilder.Entity("ProductUnit", b =>
                 {
-                    b.Property<string>("ProductsId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("ProductsId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("UnitsId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("UnitsId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("ProductsId", "UnitsId");
 
@@ -527,36 +486,54 @@ namespace FPTLongChau.Data.Migrations
                     b.ToTable("ProductUnit");
                 });
 
-            modelBuilder.Entity("FPTLongChau.Models.Customer", b =>
+            modelBuilder.Entity("FPTLongChau.Models.ApplicationUser", b =>
                 {
-                    b.HasOne("FPTLongChau.Models.Rank", "Rank")
-                        .WithMany("Customers")
-                        .HasForeignKey("RankId");
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
-                    b.Navigation("Rank");
+                    b.Property<DateTime>("Birthday")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<Guid>("RankId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasIndex("RankId");
+
+                    b.HasDiscriminator().HasValue("ApplicationUser");
                 });
 
-            modelBuilder.Entity("FPTLongChau.Models.Order", b =>
+            modelBuilder.Entity("FPTLongChau.Areas.Admin.Models.Order", b =>
                 {
-                    b.HasOne("FPTLongChau.Models.Customer", "Customer")
+                    b.HasOne("FPTLongChau.Models.ApplicationUser", "Customer")
                         .WithMany()
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CustomerId");
 
-                    b.HasOne("FPTLongChau.Models.DeliveryInformation", "DeliveryInformation")
+                    b.HasOne("FPTLongChau.Areas.Admin.Models.DeliveryInformation", "DeliveryInformation")
                         .WithMany("Orders")
                         .HasForeignKey("DeliveryInformationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FPTLongChau.Models.PayMode", "PayMode")
+                    b.HasOne("FPTLongChau.Areas.Admin.Models.PayMode", "PayMode")
                         .WithMany("Orders")
-                        .HasForeignKey("PayModeId");
+                        .HasForeignKey("PayModeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("FPTLongChau.Models.ShipMode", "ShipMode")
+                    b.HasOne("FPTLongChau.Areas.Admin.Models.ShipMode", "ShipMode")
                         .WithMany("Orders")
-                        .HasForeignKey("ShipModeId");
+                        .HasForeignKey("ShipModeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Customer");
 
@@ -567,15 +544,15 @@ namespace FPTLongChau.Data.Migrations
                     b.Navigation("ShipMode");
                 });
 
-            modelBuilder.Entity("FPTLongChau.Models.OrderDetail", b =>
+            modelBuilder.Entity("FPTLongChau.Areas.Admin.Models.OrderDetail", b =>
                 {
-                    b.HasOne("FPTLongChau.Models.Order", "Order")
+                    b.HasOne("FPTLongChau.Areas.Admin.Models.Order", "Order")
                         .WithMany("OrderDetails")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FPTLongChau.Models.Product", "Product")
+                    b.HasOne("FPTLongChau.Areas.Admin.Models.Product", "Product")
                         .WithMany("OrderDetails")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -586,15 +563,15 @@ namespace FPTLongChau.Data.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("FPTLongChau.Models.Product", b =>
+            modelBuilder.Entity("FPTLongChau.Areas.Admin.Models.Product", b =>
                 {
-                    b.HasOne("FPTLongChau.Models.Category", "Category")
+                    b.HasOne("FPTLongChau.Areas.Admin.Models.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FPTLongChau.Models.Storage", "Storage")
+                    b.HasOne("FPTLongChau.Areas.Admin.Models.Storage", "Storage")
                         .WithMany("Products")
                         .HasForeignKey("StorageId");
 
@@ -656,13 +633,13 @@ namespace FPTLongChau.Data.Migrations
 
             modelBuilder.Entity("ProductSupplier", b =>
                 {
-                    b.HasOne("FPTLongChau.Models.Product", null)
+                    b.HasOne("FPTLongChau.Areas.Admin.Models.Product", null)
                         .WithMany()
                         .HasForeignKey("ProductsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FPTLongChau.Models.Supplier", null)
+                    b.HasOne("FPTLongChau.Areas.Admin.Models.Supplier", null)
                         .WithMany()
                         .HasForeignKey("SuppliersId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -671,55 +648,66 @@ namespace FPTLongChau.Data.Migrations
 
             modelBuilder.Entity("ProductUnit", b =>
                 {
-                    b.HasOne("FPTLongChau.Models.Product", null)
+                    b.HasOne("FPTLongChau.Areas.Admin.Models.Product", null)
                         .WithMany()
                         .HasForeignKey("ProductsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FPTLongChau.Models.Unit", null)
+                    b.HasOne("FPTLongChau.Areas.Admin.Models.Unit", null)
                         .WithMany()
                         .HasForeignKey("UnitsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("FPTLongChau.Models.Category", b =>
+            modelBuilder.Entity("FPTLongChau.Models.ApplicationUser", b =>
+                {
+                    b.HasOne("FPTLongChau.Areas.Admin.Models.Rank", "Rank")
+                        .WithMany("Customers")
+                        .HasForeignKey("RankId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Rank");
+                });
+
+            modelBuilder.Entity("FPTLongChau.Areas.Admin.Models.Category", b =>
                 {
                     b.Navigation("Products");
                 });
 
-            modelBuilder.Entity("FPTLongChau.Models.DeliveryInformation", b =>
+            modelBuilder.Entity("FPTLongChau.Areas.Admin.Models.DeliveryInformation", b =>
                 {
                     b.Navigation("Orders");
                 });
 
-            modelBuilder.Entity("FPTLongChau.Models.Order", b =>
+            modelBuilder.Entity("FPTLongChau.Areas.Admin.Models.Order", b =>
                 {
                     b.Navigation("OrderDetails");
                 });
 
-            modelBuilder.Entity("FPTLongChau.Models.PayMode", b =>
+            modelBuilder.Entity("FPTLongChau.Areas.Admin.Models.PayMode", b =>
                 {
                     b.Navigation("Orders");
                 });
 
-            modelBuilder.Entity("FPTLongChau.Models.Product", b =>
+            modelBuilder.Entity("FPTLongChau.Areas.Admin.Models.Product", b =>
                 {
                     b.Navigation("OrderDetails");
                 });
 
-            modelBuilder.Entity("FPTLongChau.Models.Rank", b =>
+            modelBuilder.Entity("FPTLongChau.Areas.Admin.Models.Rank", b =>
                 {
                     b.Navigation("Customers");
                 });
 
-            modelBuilder.Entity("FPTLongChau.Models.ShipMode", b =>
+            modelBuilder.Entity("FPTLongChau.Areas.Admin.Models.ShipMode", b =>
                 {
                     b.Navigation("Orders");
                 });
 
-            modelBuilder.Entity("FPTLongChau.Models.Storage", b =>
+            modelBuilder.Entity("FPTLongChau.Areas.Admin.Models.Storage", b =>
                 {
                     b.Navigation("Products");
                 });
