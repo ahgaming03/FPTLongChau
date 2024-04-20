@@ -8,11 +8,15 @@ namespace FPTLongChau.Areas.Admin.Models
         [Required]
         [StringLength(256)]
         public string Title { get; set; }
+        [Required]
+        public decimal Price { get; set; }
         public string? Description { get; set; }
+        [Required]
+        [Display(Name ="Category")]
+        public Guid CategoryId { get; set; }
         public Category Category { get; set; }
-        public Storage Storage { get; set; }
         public List<OrderDetail>? OrderDetails { get; set; }
-        public List<Supplier>? Suppliers { get; set; }
-        public List<Unit>? Units { get; set; }
+        public ICollection<Storage>? Storages { get; set; }
+        public List<Unit> Units { get; set; }
     }
 }

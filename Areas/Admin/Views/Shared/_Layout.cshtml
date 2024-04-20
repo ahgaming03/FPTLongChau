@@ -1,11 +1,18 @@
-﻿<!DOCTYPE html>
+﻿@functions {
+	public string IsActive(string controller, string action)
+	{
+		var routeData = Context.Request.RouteValues;
+		string currentAction = routeData["action"].ToString();
+		string currentController = routeData["controller"].ToString();
+
+		return controller == currentController && action == currentAction ? "active" : "";
+	}
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
-	@* <meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-	<link rel="stylesheet" href="~/FPTLongChau.styles.css" asp-append-version="true" /> *@
+
 
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -72,19 +79,19 @@
 		<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
 			<!-- Sidebar - Brand -->
-			<a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+			<a class="sidebar-brand d-flex align-items-center justify-content-center" asp-area="Admin" asp-controller="Dashboard" asp-action="Index">
 				<div class="sidebar-brand-icon rotate-n-15">
 					<i class="fas fa-laugh-wink"></i>
 				</div>
-				<div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+				<div class="sidebar-brand-text mx-3">FPT Long Chau</div>
 			</a>
 
 			<!-- Divider -->
 			<hr class="sidebar-divider my-0">
 
 			<!-- Nav Item - Dashboard -->
-			<li class="nav-item active">
-				<a class="nav-link" href="index.html">
+			<li class="nav-item @IsActive("Dashboard", "Index")">
+				<a class="nav-link" asp-area="Admin" asp-controller="Dashboard" asp-action="Index">
 					<i class="fas fa-fw fa-tachometer-alt"></i>
 					<span>Dashboard</span>
 				</a>
@@ -95,20 +102,44 @@
 
 			<!-- Heading -->
 			<div class="sidebar-heading">
-				Interface
+				Product
 			</div>
 
-			<!-- Nav Item - Pages Collapse Menu -->
-			<li class="nav-item">
-				<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-				   aria-expanded="true" aria-controls="collapseTwo">
-					<i class="fas fa-fw fa-cog"></i>
-					<span>Components</span>
+			<!-- Nav Item - Product -->
+			<li class="nav-item @IsActive("Products", "Index")">
+				<a class="nav-link" asp-area="Admin" asp-controller="Products" asp-action="Index">
+					<i class="fas fa-fw fa-table"></i>
+					<span>Product</span>
 				</a>
-				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+			</li>
+
+			<!-- Nav Item - Category -->
+			<li class="nav-item @IsActive("Categories", "Index")">
+				<a class="nav-link" asp-area="Admin" asp-controller="Categories" asp-action="Index">
+					<i class="fas fa-fw fa-table"></i>
+					<span>Category</span>
+				</a>
+			</li>
+
+			<!-- Nav Item - Storage -->
+			<li class="nav-item @IsActive("Storages", "Index")">
+				<a class="nav-link" asp-area="Admin" asp-controller="Storages" asp-action="Index">
+					<i class="fas fa-fw fa-table"></i>
+					<span>Storage</span>
+				</a>
+			</li>
+
+			<!-- Nav Item - Pages Collapse Menu -->
+			<li class="nav-item @IsActive("Products", "Index")">
+				<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProduct"
+				   aria-expanded="true" aria-controls="collapseProduct">
+					<i class="fas fa-fw fa-cog"></i>
+					<span>Products</span>
+				</a>
+				<div id="collapseProduct" class="collapse" aria-labelledby="headingProduct" data-parent="#accordionSidebar">
 					<div class="bg-white py-2 collapse-inner rounded">
-						<h6 class="collapse-header">Custom Components:</h6>
-						<a class="collapse-item" href="buttons.html">Buttons</a>
+						<h6 class="collapse-header">Actions:</h6>
+						<a class="collapse-item" asp-area="Admin" asp-controller="Products" asp-action="Index">Index</a>
 						<a class="collapse-item" href="cards.html">Cards</a>
 					</div>
 				</div>
@@ -404,7 +435,9 @@
 				</nav>
 				<!-- End of Topbar -->
 				<!-- Begin Page Content -->
+				<div class="container-fluid">
 				@RenderBody()
+				</div>
 				<!-- /.container-fluid -->
 
 			</div>
@@ -448,16 +481,9 @@
 		</div>
 	</div>
 
-	@* 	<footer class="border-top footer text-muted">
-	<div class="container">
-	&copy; 2024 - FPTLongChau - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-	</div>
-	</footer> *@
-	@* 	<script src="~/lib/jquery/dist/jquery.min.js"></script>
-	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-	<script src="~/js/site.js" asp-append-version="true"></script> *@
-
 	<!-- Bootstrap core JavaScript-->
+	@* <script src="~/lib/jquery/dist/jquery.min.js"></script> *@
+	@* <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script> *@
 	<script src="~/Admin/vendor/jquery/jquery.min.js"></script>
 	<script src="~/Admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
@@ -465,6 +491,7 @@
 	<script src="~/Admin/vendor/jquery-easing/jquery.easing.min.js"></script>
 
 	<!-- Custom scripts for all pages-->
+	@* <script src="~/js/site.js" asp-append-version="true"></script> *@
 	<script src="~/Admin/js/sb-admin-2.min.js"></script>
 
 	<!-- Page level plugins -->
