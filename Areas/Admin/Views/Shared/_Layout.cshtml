@@ -1,11 +1,10 @@
 ﻿@functions {
-	public string IsActive(string controller, string action)
+	public string IsActive(string controller)
 	{
 		var routeData = Context.Request.RouteValues;
-		string currentAction = routeData["action"].ToString();
 		string currentController = routeData["controller"].ToString();
 
-		return controller == currentController && action == currentAction ? "active" : "";
+		return controller == currentController ? "active" : "";
 	}
 }
 
@@ -30,49 +29,13 @@
 
 	<!-- Custom styles for this template-->
 	<link href="~/Admin/css/sb-admin-2.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this page -->
 	@await RenderSectionAsync("Styles", required: false)
 
 
 </head>
 <body id="page-top">
-	@* 	<header>
-	<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-	<div class="container-fluid">
-	<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">FPTLongChau</a>
-	<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-	aria-expanded="false" aria-label="Toggle navigation">
-	<span class="navbar-toggler-icon"></span>
-	</button>
-	<div class="navbar-collapse d-sm-inline-flex justify-content-between collapse">
-	<ul class="navbar-nav flex-grow-1">
-	<li class="nav-item">
-	<a class="nav-link text-dark" asp-area="Admin" asp-controller="PayModes" asp-action="Index">Pay Mode</a>
-	</li>
-	<li class="nav-item">
-	<a class="nav-link text-dark" asp-area="Admin" asp-controller="Categories" asp-action="Index">Category</a>
-	</li>
-	<li class="nav-item">
-	<a class="nav-link text-dark" asp-area="Admin" asp-controller="Ranks" asp-action="Index">Ranks</a>
-	</li>
-	<li class="nav-item">
-	<a class="nav-link text-dark" asp-area="Admin" asp-controller="Products" asp-action="Index">Product</a>
-	</li>
-	<li class="nav-item">
-	<a class="nav-link text-dark" asp-area="Admin" asp-controller="ShipModes" asp-action="Index">Ship Mode</a>
-	</li>
-	<li class="nav-item">
-	<a class="nav-link text-dark" asp-area="Admin" asp-controller="Suppliers" asp-action="Index">Supplier</a>
-	</li>
-	<li class="nav-item">
-	<a class="nav-link text-dark" asp-area="Admin" asp-controller="Units" asp-action="Index">Unit</a>
-	</li>
-	</ul>
-	<partial name="_LoginPartial" />
-	</div>
-	</div>
-	</nav>
-	</header> *@
-
 	<!-- Page Wrapper -->
 	<div id="wrapper">
 		<!-- Sidebar -->
@@ -90,7 +53,7 @@
 			<hr class="sidebar-divider my-0">
 
 			<!-- Nav Item - Dashboard -->
-			<li class="nav-item @IsActive("Dashboard", "Index")">
+			<li class="nav-item @IsActive("Dashboard")">
 				<a class="nav-link" asp-area="Admin" asp-controller="Dashboard" asp-action="Index">
 					<i class="fas fa-fw fa-tachometer-alt"></i>
 					<span>Dashboard</span>
@@ -106,7 +69,7 @@
 			</div>
 
 			<!-- Nav Item - Product -->
-			<li class="nav-item @IsActive("Products", "Index")">
+			<li class="nav-item @IsActive("Products")">
 				<a class="nav-link" asp-area="Admin" asp-controller="Products" asp-action="Index">
 					<i class="fas fa-fw fa-table"></i>
 					<span>Product</span>
@@ -114,7 +77,7 @@
 			</li>
 
 			<!-- Nav Item - Category -->
-			<li class="nav-item @IsActive("Categories", "Index")">
+			<li class="nav-item @IsActive("Categories")">
 				<a class="nav-link" asp-area="Admin" asp-controller="Categories" asp-action="Index">
 					<i class="fas fa-fw fa-table"></i>
 					<span>Category</span>
@@ -122,28 +85,22 @@
 			</li>
 
 			<!-- Nav Item - Storage -->
-			<li class="nav-item @IsActive("Storages", "Index")">
+			<li class="nav-item @IsActive("Storages")">
 				<a class="nav-link" asp-area="Admin" asp-controller="Storages" asp-action="Index">
 					<i class="fas fa-fw fa-table"></i>
 					<span>Storage</span>
 				</a>
 			</li>
 
-			<!-- Nav Item - Pages Collapse Menu -->
-			<li class="nav-item @IsActive("Products", "Index")">
-				<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProduct"
-				   aria-expanded="true" aria-controls="collapseProduct">
-					<i class="fas fa-fw fa-cog"></i>
-					<span>Products</span>
+			<!-- Nav Item - Supplier -->
+			<li class="nav-item @IsActive("Suppliers")">
+				<a class="nav-link" asp-area="Admin" asp-controller="Suppliers" asp-action="Index">
+					<i class="fas fa-fw fa-table"></i>
+					<span>Supplier</span>
 				</a>
-				<div id="collapseProduct" class="collapse" aria-labelledby="headingProduct" data-parent="#accordionSidebar">
-					<div class="bg-white py-2 collapse-inner rounded">
-						<h6 class="collapse-header">Actions:</h6>
-						<a class="collapse-item" asp-area="Admin" asp-controller="Products" asp-action="Index">Index</a>
-						<a class="collapse-item" href="cards.html">Cards</a>
-					</div>
-				</div>
 			</li>
+
+			
 
 			<!-- Nav Item - Utilities Collapse Menu -->
 			<li class="nav-item">
@@ -495,7 +452,7 @@
 	<script src="~/Admin/js/sb-admin-2.min.js"></script>
 
 	<!-- Page level plugins -->
-	<script src="~/Admin/vendor/chart.js/Chart.min.js"></script>
+	@await RenderSectionAsync("Plugins", required:false)
 
 	<!-- Page level custom scripts -->
 	@await RenderSectionAsync("Scripts", required: false)

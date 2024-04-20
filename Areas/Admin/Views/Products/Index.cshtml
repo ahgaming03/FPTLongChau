@@ -1,0 +1,103 @@
+﻿@model IEnumerable<FPTLongChau.Areas.Admin.Models.Product>
+
+@{
+    ViewData["Title"] = "Product";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<!-- Page Heading -->
+<h1 class="h3 mb-2 text-gray-800">@ViewBag.Title</h1>
+<p>
+	<a asp-action="Create" class="btn btn-success btn-icon-split">
+		<span class="icon text-white-50">
+			<i class="fas fa-plus"></i>
+		</span>
+		<span class="text">Create New</span>
+	</a>
+</p>
+
+<!-- DataTales Example -->
+<div class="card mb-4 shadow">
+	<div class="card-header py-3">
+		<h6 class="m-0 font-weight-bold text-primary">@ViewBag.Title</h6>
+	</div>
+	<div class="card-body">
+		<div class="table-responsive">
+			<table class="table-bordered table" id="dataTable" width="100%" cellspacing="0">
+				<thead>
+					<tr>
+						<th>
+							@Html.DisplayNameFor(model => model.Title)
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.Price)
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.Description)
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.Category)
+						</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tfoot>
+					<tr>
+						<th>
+							@Html.DisplayNameFor(model => model.Title)
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.Price)
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.Description)
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.Category)
+						</th>
+						<th>Actions</th>
+					</tr>
+				</tfoot>
+				<tbody>
+					@foreach(var item in Model)
+					{
+						<tr>
+							<td>
+								@Html.DisplayFor(modelItem => item.Title)
+							</td>
+							<td>
+								@Html.DisplayFor(modelItem => item.Price)
+							</td>
+							<td>
+								@Html.DisplayFor(modelItem => item.Description)
+							</td>
+							<td>
+								@Html.DisplayFor(modelItem => item.Category.Title)
+							</td>
+							<td>
+								<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+								<a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+								<a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+@section Plugins {
+    <script src="~/Admin/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+}
+
+@section Scripts {
+    <script src="~/Admin/js/demo/datatables-demo.js"></script>
+}
+
+@section Styles {
+    <link href="~/Admin/vendor/datatables/dataTables.bootstrap4.min.css"
+          rel="stylesheet" />
+}

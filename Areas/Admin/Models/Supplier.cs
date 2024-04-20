@@ -8,6 +8,6 @@ namespace FPTLongChau.Areas.Admin.Models
         [Required]
         public string Name { get; set; }
         public string? Description { get; set; }
-        public ICollection<Storage>? Storages { get; set; }
+        public List<Storage>? Storages { get; set; }
     }
 }
