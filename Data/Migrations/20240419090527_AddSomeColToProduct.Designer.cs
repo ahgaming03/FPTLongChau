@@ -4,6 +4,7 @@ using FPTLongChau.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FPTLongChau.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240419090527_AddSomeColToProduct")]
+    partial class AddSomeColToProduct
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -55,7 +58,7 @@ namespace FPTLongChau.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DeliveryInformations");
+                    b.ToTable("DeliveryInformation");
                 });
 
             modelBuilder.Entity("FPTLongChau.Areas.Admin.Models.Order", b =>
@@ -143,14 +146,22 @@ namespace FPTLongChau.Data.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
+                    b.Property<string>("StorageId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
+                    b.Property<Guid>("UnitId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("StorageId");
 
                     b.ToTable("Products");
                 });
@@ -193,11 +204,8 @@ namespace FPTLongChau.Data.Migrations
 
             modelBuilder.Entity("FPTLongChau.Areas.Admin.Models.Storage", b =>
                 {
-                    b.Property<Guid>("SupplierId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ProductId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
@@ -205,9 +213,7 @@ namespace FPTLongChau.Data.Migrations
                     b.Property<DateTime>("Time")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("SupplierId", "ProductId");
-
-                    b.HasIndex("ProductId");
+                    b.HasKey("Id");
 
                     b.ToTable("Storages");
                 });
@@ -459,6 +465,21 @@ namespace FPTLongChau.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("ProductSupplier", b =>
+                {
+                    b.Property<Guid>("ProductsId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("SuppliersId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("ProductsId", "SuppliersId");
+
+                    b.HasIndex("SuppliersId");
+
+                    b.ToTable("ProductSupplier");
+                });
+
             modelBuilder.Entity("ProductUnit", b =>
                 {
                     b.Property<Guid>("ProductsId")
@@ -559,26 +580,13 @@ namespace FPTLongChau.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("FPTLongChau.Areas.Admin.Models.Storage", "Storage")
+                        .WithMany("Products")
+                        .HasForeignKey("StorageId");
+
                     b.Navigation("Category");
-                });
 
-            modelBuilder.Entity("FPTLongChau.Areas.Admin.Models.Storage", b =>
-                {
-                    b.HasOne("FPTLongChau.Areas.Admin.Models.Product", "Product")
-                        .WithMany("Storages")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("FPTLongChau.Areas.Admin.Models.Supplier", "Supplier")
-                        .WithMany("Storages")
-                        .HasForeignKey("SupplierId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-
-                    b.Navigation("Supplier");
+                    b.Navigation("Storage");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -632,6 +640,21 @@ namespace FPTLongChau.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("ProductSupplier", b =>
+                {
+                    b.HasOne("FPTLongChau.Areas.Admin.Models.Product", null)
+                        .WithMany()
+                        .HasForeignKey("ProductsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FPTLongChau.Areas.Admin.Models.Supplier", null)
+                        .WithMany()
+                        .HasForeignKey("SuppliersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("ProductUnit", b =>
                 {
                     b.HasOne("FPTLongChau.Areas.Admin.Models.Product", null)
@@ -681,8 +704,6 @@ namespace FPTLongChau.Data.Migrations
             modelBuilder.Entity("FPTLongChau.Areas.Admin.Models.Product", b =>
                 {
                     b.Navigation("OrderDetails");
-
-                    b.Navigation("Storages");
                 });
 
             modelBuilder.Entity("FPTLongChau.Areas.Admin.Models.Rank", b =>
@@ -695,9 +716,9 @@ namespace FPTLongChau.Data.Migrations
                     b.Navigation("Orders");
                 });
 
-            modelBuilder.Entity("FPTLongChau.Areas.Admin.Models.Supplier", b =>
+            modelBuilder.Entity("FPTLongChau.Areas.Admin.Models.Storage", b =>
                 {
-                    b.Navigation("Storages");
+                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }
