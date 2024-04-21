@@ -2,28 +2,61 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
-<ul class="navbar-nav">
-@if (SignInManager.IsSignedIn(User))
-{
-    <li class="nav-item">
-        <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>
-    </li>
-    <li class="nav-item">
-        <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-            <button  type="submit" class="nav-link btn btn-link text-dark">Logout</button>
-        </form>
-    </li>
-}
-else
-{
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Admin" asp-controller="Dashboard" asp-action="Index">Admin dashboard</a>
-    </li>
-}
-</ul>
+@* <ul class="navbar-nav">
+	<li class="nav-item">
+		<a class="nav-link text-dark" asp-area="Admin" asp-controller="Dashboard" asp-action="Index">Admin dashboard</a>
+	</li>
+</ul> *@
+
+<div class="order-lg-last col-lg-5 col-sm-8 col-8">
+	<div class="d-flex float-end">
+
+		@if(SignInManager.IsSignedIn(User))
+		{
+			<a asp-area="Identity"
+			   asp-page="/Account/Manage/Index" 
+			   title="Manage"
+			   class="me-1 py-1 px-3 nav-link d-flex align-items-center rounded border">
+				<i class="fas fa-user-alt m-1 me-md-2"></i>
+				<p class="d-none d-md-block mb-0">
+					Hello @User.Identity?.Name!
+				</p>
+			</a>
+			<a asp-area="Identity"
+			   asp-page="/Account/Logout"
+			   asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })"
+			   class="me-1 py-1 px-3 nav-link d-flex align-items-center rounded border">
+				<i class="fas fa-sign-out-alt m-1 me-md-2"></i>
+				<p class="d-none d-md-block mb-0">
+					Logout
+				</p>
+			</a>
+		}
+		else
+		{
+			<a asp-area="Identity" asp-page="/Account/Register"
+			   class="me-1 py-1 px-3 nav-link d-flex align-items-center rounded border">
+				<i class="fas fa-user-alt m-1 me-md-2"></i>
+				<p class="d-none d-md-block mb-0">
+					Register
+				</p>
+			</a>
+			<a asp-area="Identity" asp-page="/Account/Login"
+			   class="me-1 py-1 px-3 nav-link d-flex align-items-center rounded border">
+				<i class="fas fa-plus m-1 me-md-2"></i>
+				<p class="d-none d-md-block mb-0">
+					Login
+				</p>
+			</a>
+		}
+		<a href="#"
+		   class="me-1 py-1 px-3 nav-link d-flex align-items-center rounded border">
+			<i class="fas fa-shopping-cart m-1 me-md-2"></i>
+			<p class="d-none d-md-block mb-0">
+				My cart
+			</p>
+		</a>
+
+
+	</div>
+</div>
