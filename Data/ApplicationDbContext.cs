@@ -40,20 +40,6 @@ namespace FPTLongChau.Data
 				.HasOne(od => od.Product)
 				.WithMany(p => p.OrderDetails)
 				.HasForeignKey(od => od.ProductId);
-
-			/* Storage */
-			modelBuilder.Entity<Storage>()
-				.HasKey(st => new { st.SupplierId, st.ProductId }); // Composite key
-
-			modelBuilder.Entity<Storage>()
-				.HasOne(st => st.Supplier)
-				.WithMany(s => s.Storages)
-				.HasForeignKey(st => st.SupplierId);
-
-			modelBuilder.Entity<Storage>()
-				.HasOne(st => st.Product)
-				.WithMany(p => p.Storages)
-				.HasForeignKey(st => st.ProductId);
 		}
 	}
 }
