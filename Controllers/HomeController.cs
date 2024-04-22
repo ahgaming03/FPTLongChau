@@ -1,5 +1,7 @@
+using FPTLongChau.Data;
 using FPTLongChau.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace FPTLongChau.Controllers
@@ -7,15 +9,18 @@ namespace FPTLongChau.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ApplicationDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+		public HomeController(ILogger<HomeController> logger, ApplicationDbContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var applicationDbContext =  _context.Products.Include(p => p.Category);
+            return View(applicationDbContext.ToListAsync());
         }
 
         public IActionResult Privacy()
