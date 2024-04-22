@@ -23,6 +23,9 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Views\Templates\DisplayTemplates\" />
+    <Folder Include="Views\Templates\" />
+    <Folder Include="wwwroot\img\" />
   </ItemGroup>
 
 </Project>
