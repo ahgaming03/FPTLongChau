@@ -11,8 +11,10 @@ namespace FPTLongChau.Areas.Admin.Models
         [Required]
         public double Price { get; set; }
         public string? Description { get; set; }
-        [Required]
-        [Display(Name ="Category")]
+        [Display(Name = "Image")]
+        public string? Image { get; set; }
+		[Required]
+        [Display(Name = "Category")]
         public Guid CategoryId { get; set; }
         public Category? Category { get; set; }
         public List<OrderDetail>? OrderDetails { get; set; }

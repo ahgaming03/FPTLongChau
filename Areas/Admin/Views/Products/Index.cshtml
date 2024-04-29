@@ -1,8 +1,8 @@
-﻿@model IEnumerable<FPTLongChau.Areas.Admin.Models.Product>
+﻿@model IEnumerable<Product>
 
 @{
-    ViewData["Title"] = "Product";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+	ViewData["Title"] = "Product";
+	Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
 
@@ -28,6 +28,9 @@
 				<thead>
 					<tr>
 						<th>
+							@Html.DisplayNameFor(model => model.Image)
+						</th>
+						<th>
 							@Html.DisplayNameFor(model => model.Title)
 						</th>
 						<th>
@@ -44,6 +47,9 @@
 				</thead>
 				<tfoot>
 					<tr>
+						<th>
+							@Html.DisplayNameFor(model => model.Image)
+						</th>
 						<th>
 							@Html.DisplayNameFor(model => model.Title)
 						</th>
@@ -64,21 +70,47 @@
 					{
 						<tr>
 							<td>
+								@if(item.Image != null)
+								{
+									<img src="https://pharmacitylongchau.blob.core.windows.net/imagecontainer/@Html.DisplayFor(modelItem => item.Image)"
+										 width="100"
+										 alt="@Html.DisplayFor(modelItem => item.Title)" />
+								}
+								else
+								{
+									<img src="~/img/default_image.jpg"
+										 width="100"
+										 alt="@Html.DisplayFor(modelItem => item.Title)" />
+								}
+
+							</td>
+							<td>
 								@Html.DisplayFor(modelItem => item.Title)
 							</td>
 							<td>
 								@Html.DisplayFor(modelItem => item.Price)
 							</td>
 							<td>
-								@Html.DisplayFor(modelItem => item.Description)
+								@{
+									string description = item.Description;
+									if(description != null && description.Length >= 300)
+									{
+										description = description.Substring(0, 300) + "...";
+										@Html.Raw(description)
+									}
+									else
+									{
+										@Html.DisplayFor(modelItem => item.Description)
+									}
+								}
 							</td>
 							<td>
 								@Html.DisplayFor(modelItem => item.Category.Title)
 							</td>
 							<td>
-								<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-								<a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-								<a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+								<a class="btn btn-success mb-2" asp-action="Edit" asp-route-id="@item.Id"><i class="fas fa-pencil-alt"></i></a>
+								<a class="btn btn-danger mb-2" asp-action="Delete" asp-route-id="@item.Id"><i class="fas fa-trash"></i></a>
+								<a class="btn btn-primary mb-2" asp-action="Details" asp-route-id="@item.Id">Details</a>
 							</td>
 						</tr>
 					}
@@ -89,15 +121,15 @@
 </div>
 
 @section Plugins {
-    <script src="~/Admin/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="~/Admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+	<script src="~/Admin/vendor/datatables/jquery.dataTables.min.js"></script>
+	<script src="~/Admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 }
 
 @section Scripts {
-    <script src="~/Admin/js/demo/datatables-demo.js"></script>
+	<script src="~/Admin/js/demo/datatables-demo.js"></script>
 }
 
 @section Styles {
-    <link href="~/Admin/vendor/datatables/dataTables.bootstrap4.min.css"
-          rel="stylesheet" />
+	<link href="~/Admin/vendor/datatables/dataTables.bootstrap4.min.css"
+		  rel="stylesheet" />
 }
