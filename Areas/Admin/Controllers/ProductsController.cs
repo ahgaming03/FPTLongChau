@@ -175,6 +175,10 @@ namespace FPTLongChau.Areas.Admin.Controllers
 			var product = await _context.Products.FindAsync(id);
 			if(product != null)
 			{
+				if(product.Image != null)
+				{
+					_imageService.DeleteImageFromAzureBlob(product.Image);
+				}
 				_context.Products.Remove(product);
 			}
 
