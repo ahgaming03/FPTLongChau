@@ -116,18 +116,13 @@ namespace FPTLongChau.Areas.Admin.Controllers
 					var oldImage = _context.Products.Where(p => p.Id == product.Id).Select(p => p.Image).FirstOrDefault();
 					product.Image = oldImage;
 					if(FileImage != null)
-						if(FileImage.FileName != null)
+					{
+						if(oldImage != null)
 						{
-							if(oldImage != null)
-							{
-								_imageService.DeleteImageFromAzureBlob(oldImage);
-								product.Image = _imageService.UploadImageToAzureBlob(FileImage);
-							}
-							else
-							{
-								product.Image = _imageService.UploadImageToAzureBlob(FileImage);
-							}
+							_imageService.DeleteImageFromAzureBlob(oldImage);
 						}
+						product.Image = _imageService.UploadImageToAzureBlob(FileImage);
+					}
 					_context.Update(product);
 					await _context.SaveChangesAsync();
 				}
@@ -175,6 +170,10 @@ namespace FPTLongChau.Areas.Admin.Controllers
 			var product = await _context.Products.FindAsync(id);
 			if(product != null)
 			{
+				if(product.Image != null)
+				{
+					_imageService.DeleteImageFromAzureBlob(product.Image);
+				}
 				_context.Products.Remove(product);
 			}
 
