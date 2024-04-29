@@ -11,9 +11,9 @@
 <div class="order-lg-last col-lg-5 col-sm-8 col-8">
 	<div class="d-flex float-end">
 		<a class="me-1 p-1 nav-link d-flex align-items-center bg-light rounded-circle border"
-		asp-controller="Carts"
-		asp-action="Index"
-		>
+		   asp-area=""
+		   asp-controller="Carts"
+		   asp-action="Index">
 			<i class="fas fa-shopping-cart m-1 me-md-2"></i>
 		</a>
 		@if(SignInManager.IsSignedIn(User))
