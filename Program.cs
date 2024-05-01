@@ -1,5 +1,8 @@
 using FPTLongChau.Data;
 using FPTLongChau.Models;
+using FPTLongChau.Options;
+using FPTLongChau.Services.Abstract;
+using FPTLongChau.Services.Concrete;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,6 +17,11 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
+
+var services = builder.Services;
+
+services.Configure<AzureOptions>(builder.Configuration.GetSection("Azure"));
+services.AddTransient<IImageService, ImageService>();
 
 var app = builder.Build();
 

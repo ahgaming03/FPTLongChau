@@ -20,41 +20,18 @@
 	@await RenderSectionAsync("Styles", required: false)
 </head>
 <body>
-	@*     <header>
-	<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-	<div class="container-fluid">
-	<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">FPTLongChau</a>
-	<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-	aria-expanded="false" aria-label="Toggle navigation">
-	<span class="navbar-toggler-icon"></span>
-	</button>
-	<div class="navbar-collapse d-sm-inline-flex justify-content-between collapse">
-	<ul class="navbar-nav flex-grow-1">
-	<li class="nav-item">
-	<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-	</li>
-	<li class="nav-item">
-	<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-	</li>
-	</ul>
-	<partial name="_LoginPartial" />
-	</div>
-	</div>
-	</nav>
-	</header> *@
 
-	<!--Main Navigation-->
 	<!--Main Navigation-->
 	<header>
 		<!-- Jumbotron -->
-		<div class="p-3 bg-white border-bottom text-center">
+		<div class="p-3 bg-primary text-center">
 			<div class="container">
 				<div class="row gy-3">
 					<!-- Left elements -->
 					<div class="col-lg-2 col-sm-4 col-4">
 						<a href="/"
 						   class="float-start">
-							<img src="https://mdbootstrap.com/img/logo/mdb-transaprent-noshadows.png"
+							<img src="~/img/LongChauLogo.svg"
 								 height="35" />
 						</a>
 					</div>
@@ -63,20 +40,22 @@
 					<partial name="_LoginPartial" />
 					<!-- Center elements -->
 					<!-- Right elements -->
-					<div class="col-lg-5 col-md-12 col-12">
+					<form class="col-lg-5 col-md-12 col-12"
+					method="get"
+						  asp-controller="Searches"
+						  asp-action="Index">
 						<div class="input-group float-center">
 							<div class="form-outline">
 								<input type="search"
 									   id="form1"
-									   class="form-control" />
+									   class="form-control border-end-0 border-1 bg-light border" />
 								<label class="form-label" for="form1">Search</label>
 							</div>
-							<button type="button"
-									class="btn btn-primary shadow-0">
+							<button class="btn btn-info shadow-0" type="submit">
 								<i class="fas fa-search"></i>
 							</button>
 						</div>
-					</div>
+					</form>
 					<!-- Right elements -->
 				</div>
 			</div>
@@ -87,13 +66,12 @@
 		<!-- Navbar -->
 	</header>
 	<div class="container">
-		<main role="main" class="">
+		<main role="main" class="mt-3">
 			@RenderBody()
 		</main>
 	</div>
 	<!-- Footer -->
-	<footer class="text-lg-start text-muted mt-3 text-center"
-			style="background-color: #f5f5f5">
+	<footer class="text-lg-start text-muted bg-primary mt-3 text-center">
 		<!-- Section: Links  -->
 		<section class="">
 			<div class="text-md-start pt-4 pb-4 container text-center">
@@ -104,32 +82,32 @@
 						<!-- Content -->
 						<a href="/"
 						   class="">
-							<img src="https://mdbootstrap.com/img/logo/mdb-transaprent-noshadows.png"
+							<img src="~/img/LongChauLogo.svg"
 								 height="35" />
 						</a>
-						<p class="mt-2 text-dark">
-							© @DateTime.Now.ToString("yyyy") Copyright: <a target="_blank" href="https://github.com/ahgaming03">LongChau.com</a>
+						<p class="mt-1 text-white">
+							© @DateTime.Now.ToString("yyyy") Copyright: <a class="text-white" target="_blank" href="https://github.com/ahgaming03">nhathuoclongchau.com.vn</a>
 						</p>
 					</div>
 					<!-- Grid column -->
 					<!-- Grid column -->
 					<div class="col-6 col-sm-4 col-lg-2">
 						<!-- Links -->
-						<h6 class="text-uppercase text-dark fw-bold mb-2">
+						<h6 class="text-uppercase text-white fw-bold mb-2">
 							Store
 						</h6>
 						<ul class="list-unstyled mb-4">
 							<li>
-								<a class="text-muted" href="#">About us</a>
+								<a class="text-white-50" href="#">About us</a>
 							</li>
 							<li>
-								<a class="text-muted" href="#">Find store</a>
+								<a class="text-white-50" href="#">Find store</a>
 							</li>
 							<li>
-								<a class="text-muted" href="#">Categories</a>
+								<a class="text-white-50" href="#">Categories</a>
 							</li>
 							<li>
-								<a class="text-muted" href="#">Blogs</a>
+								<a class="text-white-50" href="#">Blogs</a>
 							</li>
 						</ul>
 					</div>
@@ -137,21 +115,21 @@
 					<!-- Grid column -->
 					<div class="col-6 col-sm-4 col-lg-2">
 						<!-- Links -->
-						<h6 class="text-uppercase text-dark fw-bold mb-2">
+						<h6 class="text-uppercase text-white fw-bold mb-2">
 							Information
 						</h6>
 						<ul class="list-unstyled mb-4">
 							<li>
-								<a class="text-muted" href="#">Help center</a>
+								<a class="text-white-50" href="#">Help center</a>
 							</li>
 							<li>
-								<a class="text-muted" href="#">Money refund</a>
+								<a class="text-white-50" href="#">Money refund</a>
 							</li>
 							<li>
-								<a class="text-muted" href="#">Shipping info</a>
+								<a class="text-white-50" href="#">Shipping info</a>
 							</li>
 							<li>
-								<a class="text-muted" href="#">Refunds</a>
+								<a class="text-white-50" href="#">Refunds</a>
 							</li>
 						</ul>
 					</div>
@@ -159,21 +137,21 @@
 					<!-- Grid column -->
 					<div class="col-6 col-sm-4 col-lg-2">
 						<!-- Links -->
-						<h6 class="text-uppercase text-dark fw-bold mb-2">
+						<h6 class="text-uppercase text-white fw-bold mb-2">
 							Support
 						</h6>
 						<ul class="list-unstyled mb-4">
 							<li>
-								<a class="text-muted" href="#">Help center</a>
+								<a class="text-white-50" href="#">Help center</a>
 							</li>
 							<li>
-								<a class="text-muted" href="#">Documents</a>
+								<a class="text-white-50" href="#">Documents</a>
 							</li>
 							<li>
-								<a class="text-muted" href="#">Account restore</a>
+								<a class="text-white-50" href="#">Account restore</a>
 							</li>
 							<li>
-								<a class="text-muted" href="#">My orders</a>
+								<a class="text-white-50" href="#">My orders</a>
 							</li>
 						</ul>
 					</div>
@@ -181,10 +159,10 @@
 					<!-- Grid column -->
 					<div class="col-12 col-sm-12 col-lg-3">
 						<!-- Links -->
-						<h6 class="text-uppercase text-dark fw-bold mb-2">
+						<h6 class="text-uppercase text-white fw-bold mb-2">
 							Newsletter
 						</h6>
-						<p class="text-muted">
+						<p class="text-white">
 							Stay in touch with latest updates about our
 							products and offers
 						</p>
@@ -214,24 +192,24 @@
 				<div class="d-flex justify-content-between py-4 border-top">
 					<!--- payment --->
 					<div>
-						<i class="fab fa-lg fa-cc-visa text-dark"></i>
-						<i class="fab fa-lg fa-cc-amex text-dark"></i>
-						<i class="fab fa-lg fa-cc-mastercard text-dark"></i>
-						<i class="fab fa-lg fa-cc-paypal text-dark"></i>
+						<i class="fab fa-lg fa-cc-visa text-white"></i>
+						<i class="fab fa-lg fa-cc-amex text-white"></i>
+						<i class="fab fa-lg fa-cc-mastercard text-white"></i>
+						<i class="fab fa-lg fa-cc-paypal text-white"></i>
 					</div>
 					<!--- payment --->
 					<!--- language selector --->
 					<div class="dropdown dropup">
-						<a class="dropdown-toggle text-dark"
+						<a class="dropdown-toggle text-white"
 						   href="#"
 						   id="Dropdown"
 						   role="button"
-						   data-mdb-toggle="dropdown"
+						   data-bs-toggle="dropdown"
 						   aria-expanded="false">
 							<i class="flag-united-kingdom flag m-0 me-1"></i>English
 						</a>
 
-						<ul class="dropdown-menu dropdown-menu-end"
+						<ul class="dropdown-menu dropdown-menu-endp"
 							aria-labelledby="Dropdown">
 							<li>
 								<a class="dropdown-item" href="#">
@@ -278,11 +256,6 @@
 									<i class="flag-portugal flag"></i>Português
 								</a>
 							</li>
-							<li>
-								<a class="dropdown-item" href="#">
-									<i class="flag-vietnam flag"></i>Vietnamese
-								</a>
-							</li>
 						</ul>
 					</div>
 					<!--- language selector --->
@@ -291,13 +264,11 @@
 		</div>
 	</footer>
 	<!-- Footer -->
-
-
-
 	<script src="~/lib/jquery/dist/jquery.min.js"></script>
 	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="~/js/site.js" asp-append-version="true"></script>
 	@await RenderSectionAsync("Scripts", required: false)
+
 </body>
 
 </html>

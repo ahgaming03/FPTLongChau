@@ -10,27 +10,45 @@
 
 <div class="order-lg-last col-lg-5 col-sm-8 col-8">
 	<div class="d-flex float-end">
-
+		<a class="me-1 p-1 nav-link d-flex align-items-center bg-light rounded-circle border"
+		   asp-area=""
+		   asp-controller="Carts"
+		   asp-action="Index">
+			<i class="fas fa-shopping-cart m-1 me-md-2"></i>
+		</a>
 		@if(SignInManager.IsSignedIn(User))
 		{
-			<a asp-area="Identity"
-			   asp-page="/Account/Manage/Index" 
-			   title="Manage"
-			   class="me-1 py-1 px-3 nav-link d-flex align-items-center rounded border">
-				<i class="fas fa-user-alt m-1 me-md-2"></i>
-				<p class="d-none d-md-block mb-0">
-					Hello @User.Identity?.Name!
-				</p>
-			</a>
-			<a asp-area="Identity"
-			   asp-page="/Account/Logout"
-			   asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })"
-			   class="me-1 py-1 px-3 nav-link d-flex align-items-center rounded border">
-				<i class="fas fa-sign-out-alt m-1 me-md-2"></i>
-				<p class="d-none d-md-block mb-0">
-					Logout
-				</p>
-			</a>
+			<div class="dropdown-center">
+				<a class="rounded-circle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+					<img src="https://placewaifu.com/image/1000" class="rounded-circle" width="40" height="40" alt="..." />
+				</a>
+
+				<ul class="dropdown-menu">
+					<li>
+						<a class="dropdown-item me-1 py-1 px-3 nav-link d-flex align-items-center rounded"
+						   asp-area="Identity"
+						   asp-page="/Account/Manage/Index"
+						   title="Manage">
+							<i class="fas fa-user-alt m-1 me-md-2"></i>
+							<p class="d-none d-md-block mb-0">
+								Profile
+							</p>
+						</a>
+					</li>
+					@* <li><hr class="dropdown-divider" /></li> *@
+					<li>
+						<a class="dropdown-item me-1 py-1 px-3 nav-link d-flex align-items-center rounded border"
+						   asp-area="Identity"
+						   asp-page="/Account/Logout"
+						   asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+							<i class="fas fa-sign-out-alt m-1 me-md-2"></i>
+							<p class="d-none d-md-block mb-0">
+								Logout
+							</p>
+						</a>
+					</li>
+				</ul>
+			</div>
 		}
 		else
 		{
@@ -49,14 +67,5 @@
 				</p>
 			</a>
 		}
-		<a href="#"
-		   class="me-1 py-1 px-3 nav-link d-flex align-items-center rounded border">
-			<i class="fas fa-shopping-cart m-1 me-md-2"></i>
-			<p class="d-none d-md-block mb-0">
-				My cart
-			</p>
-		</a>
-
-
 	</div>
 </div>

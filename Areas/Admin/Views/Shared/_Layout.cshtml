@@ -33,7 +33,6 @@
 	<!-- Custom styles for this page -->
 	@await RenderSectionAsync("Styles", required: false)
 
-
 </head>
 <body id="page-top">
 	<!-- Page Wrapper -->
@@ -97,6 +96,22 @@
 				<a class="nav-link" asp-area="Admin" asp-controller="Suppliers" asp-action="Index">
 					<i class="fas fa-fw fa-table"></i>
 					<span>Supplier</span>
+				</a>
+			</li>
+
+			<!-- Nav Item - Unit -->
+			<li class="nav-item @IsActive("Units")">
+				<a class="nav-link" asp-area="Admin" asp-controller="Units" asp-action="Index">
+					<i class="fas fa-fw fa-table"></i>
+					<span>Unit</span>
+				</a>
+			</li>
+
+			<!-- Nav Item - Pay Mode -->
+			<li class="nav-item @IsActive("PayModes")">
+				<a class="nav-link" asp-area="Admin" asp-controller="PayModes" asp-action="Index">
+					<i class="fas fa-fw fa-table"></i>
+					<span>Pay Mode</span>
 				</a>
 			</li>
 
