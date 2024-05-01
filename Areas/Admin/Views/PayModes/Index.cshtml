@@ -1,12 +1,11 @@
-﻿@model IEnumerable<FPTLongChau.Areas.Admin.Models.Unit>
+﻿@model IEnumerable<FPTLongChau.Areas.Admin.Models.PayMode>
 
 @{
-    ViewData["Title"] = "Units";
+    ViewData["Title"] = "Pay Mode";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-
+<!-- Page Heading -->
 <h1 class="h3 mb-2 text-gray-800">@ViewBag.Title</h1>
-
 <p>
     <a asp-action="Create" class="btn btn-success btn-icon-split">
         <span class="icon text-white-50">
@@ -16,6 +15,7 @@
     </a>
 </p>
 
+<!-- DataTales Example -->
 <div class="card mb-4 shadow">
     <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">@ViewBag.Title</h6>
