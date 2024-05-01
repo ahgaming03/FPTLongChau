@@ -4,7 +4,6 @@
 	ViewData["Title"] = "Home page";
 }
 <!-- Products -->
-
 @foreach(var category in Model.Categories)
 	@if(Model.Products.Any(p => p.CategoryId == category.Id))
 	{
@@ -37,13 +36,15 @@
 									}
 									<div class="card-body d-flex flex-column">
 										<h5 class="card-title" title="@Html.DisplayFor(modelItem => product.Title)">
-											@{
-												if(product.Title.Length >= 30)
-												{
-													product.Title = product.Title.Substring(0, 30) + "...";
+											<a class="text-reset" asp-area="" asp-controller="Products" asp-action="Details" asp-route-id="@product.Id">
+												@{
+													if(product.Title.Length >= 30)
+													{
+														product.Title = product.Title.Substring(0, 30) + "...";
+													}
 												}
-											}
-											@Html.DisplayFor(modelItem => product.Title)
+												@Html.DisplayFor(modelItem => product.Title)
+											</a>
 										</h5>
 										<p class="card-text">$@Html.DisplayFor(modelItem => product.Price)</p>
 										<div class="card-footer d-flex align-items-end pt-3 px-0 pb-0 mt-auto">
