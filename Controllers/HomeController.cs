@@ -19,8 +19,9 @@ namespace FPTLongChau.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext =  _context.Products.Include(p => p.Category);
-            return View(applicationDbContext.ToListAsync());
+            var products =  _context.Products.Include(p => p.Category);
+            var categories = _context.Categories;
+			return View(new ProductViewModel(products, categories));
         }
 
         public IActionResult Privacy()
