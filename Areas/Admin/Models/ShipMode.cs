@@ -11,6 +11,5 @@ namespace FPTLongChau.Areas.Admin.Models
         public List<Order>? Orders { get; set; }
 
 
-
     }
 }
