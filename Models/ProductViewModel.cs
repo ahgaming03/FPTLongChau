@@ -10,5 +10,10 @@ namespace FPTLongChau.Models
 			Products = products;
 			Categories = categories;
 		}
-	}
+
+        public ProductViewModel(IEnumerable<Product> products)
+        {
+            Products = products;
+        }
+    }
 }

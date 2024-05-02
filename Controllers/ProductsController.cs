@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FPTLongChau.Data;
 using FPTLongChau.Areas.Admin.Models;
+using FPTLongChau.Models;
 
 namespace FPTLongChau.Controllers
 {
@@ -22,8 +23,8 @@ namespace FPTLongChau.Controllers
         // GET: Products
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Products.Include(p => p.Category);
-            return View(await applicationDbContext.ToListAsync());
+            var products = _context.Products;
+            return View(new ProductViewModel(products));
         }
 
         // GET: Products/Details/5
