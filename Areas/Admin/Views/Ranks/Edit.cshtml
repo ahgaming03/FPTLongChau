@@ -1,0 +1,71 @@
+﻿@model FPTLongChau.Areas.Admin.Models.Rank
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>Rank</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Image" class="control-label"></label>
+                <input asp-for="Image" type="file" name="FileImage" id="imageInput" class="d-block" />
+                <div class="row mt-2">
+                    <div class="col-6 form-group">
+                        <label for="imageBefore" class="control-label">Before</label>
+                        @if (Model.Image != null)
+                        {
+                            <img src="https://pharmacitylongchau.blob.core.windows.net/imagecontainer/@Html.DisplayFor(item => item.Image)" width="200"
+                                 class="img-fluid m-100 img-thumbnail"
+                                 alt="@Html.DisplayFor(item => item.Title)" />
+                        }
+                        else
+                        {
+                            <img src="~/img/default_image.jpg"
+                                 class="img-fluid m-100 img-thumbnail"
+                                 alt="@Html.DisplayFor(item => item.Title)" />
+                        }
+                    </div>
+                    <div class="col-6 form-group">
+                        <label for="imageAfter" class="control-label">After</label>
+                        <img src="~/img/default_image.jpg"
+                             class="img-fluid w-100 img-thumbnail"
+                             id="imagePreview"
+                             alt="Image" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    <script src="~/Admin/js/previewImage.js"></script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
