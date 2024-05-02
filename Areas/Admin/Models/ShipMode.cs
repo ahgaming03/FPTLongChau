@@ -10,5 +10,7 @@ namespace FPTLongChau.Areas.Admin.Models
         public string? Description { get; set; }
         public List<Order>? Orders { get; set; }
 
+
+
     }
 }
