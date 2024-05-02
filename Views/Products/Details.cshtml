@@ -1,0 +1,83 @@
+﻿@model FPTLongChau.Areas.Admin.Models.Product
+
+@{
+	ViewData["Title"] = "Product Detail";
+}
+<div class="container">
+	<a href="javascript:history.back()" class="btn btn-primary">
+		<i class="fas fa-arrow-left"></i> Back
+	</a>
+</div>
+
+<!-- content -->
+<section class="py-5">
+	<div class="container">
+		<div class="row gx-5">
+			<aside class="col-lg-6">
+				<div class="rounded-4 mb-3 d-flex justify-content-center border">
+					<a data-fslightbox="mygalley" class="rounded-4"data-type="image">
+						@if(Model.Image != null)
+						{
+							<img src="https://pharmacitylongchau.blob.core.windows.net/imagecontainer/@Html.DisplayFor(modelItem => Model.Image)"
+								 class="rounded-4 fit w-100 m-auto"
+								 style=" max-height: 100vh;"
+								 alt="@Html.DisplayFor(modelItem => Model.Title)" />
+						}
+						else
+						{
+							<img src="~/img/default_image.jpg"
+								 class="rounded-4 fit w-100 m-auto"
+								 style=" max-height: 100vh;"
+								 alt="@Html.DisplayFor(modelItem => Model.Title)" />
+						}
+					</a>
+				</div>
+			</aside>
+			<main class="col-lg-6">
+				<div class="ps-lg-3">
+					<h4 class="title text-dark">
+						@Html.DisplayFor(model => model.Title)
+					</h4>
+					<div class="d-flex my-3 flex-row">
+						<span class="text-muted"><i class="fas fa-shopping-basket fa-sm mx-1"></i>154 orders</span>
+						<span class="text-success ms-2">In stock</span>
+					</div>
+
+					<div class="mb-3">
+						<span class="h5">$@Html.DisplayFor(model => model.Price)</span>
+						<span class="text-muted">/per box</span>
+					</div>
+
+					<p>
+						@Html.DisplayFor(model => model.Description)
+					</p>
+
+					<div class="row">
+						<dt class="col-3">@Html.DisplayNameFor(model => Model.Category):</dt>
+						<dd class="col-9">@Html.DisplayFor(model=> model.Category.Title)</dd>
+					</div>
+
+					<hr />
+
+					<div class="row mb-4">
+						<div class="col-md-4 col-6 mb-3">
+							<label class="mb-2 d-block">Quantity</label>
+							<div class="input-group mb-3" style="width: 170px;">
+								<button class="btn btn-white border-secondary px-3 border" type="button" id="button-addon1" data-bs-ripple-color="dark">
+									<i class="fas fa-minus"></i>
+								</button>
+								<input type="text" class="form-control border-secondary border text-center" placeholder="14" aria-label="Example text with button addon" aria-describedby="button-addon1" disabled />
+								<button class="btn btn-white border-secondary px-3 border" type="button" id="button-addon2" data-bs-ripple-color="dark">
+									<i class="fas fa-plus"></i>
+								</button>
+							</div>
+						</div>
+					</div>
+					<a href="#" class="btn btn-primary shadow-0"> <i class="me-1 fa fa-shopping-basket"></i> Add to cart </a>
+				</div>
+			</main>
+		</div>
+	</div>
+</section>
+<!-- content -->
+
