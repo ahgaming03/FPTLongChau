@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using FPTLongChau.Areas.Admin.Models;
+using FPTLongChau.Data;
+using FPTLongChau.Services.Abstract;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using FPTLongChau.Data;
-using FPTLongChau.Models;
-using FPTLongChau.Services.Abstract;
-using FPTLongChau.Areas.Admin.Models;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace FPTLongChau.Areas.Admin.Controllers
 {

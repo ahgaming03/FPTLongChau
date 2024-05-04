@@ -1,0 +1,73 @@
+﻿@page
+@model LoginModel
+
+@{
+	ViewData["Title"] = "Log in";
+}
+
+<div class="row justify-content-center">
+
+	<div class="col-xl-10 col-lg-12 col-md-9">
+
+		<div class="card o-hidden my-5 border-0 shadow-lg">
+			<div class="card-body p-0">
+				<!-- Nested Row within Card Body -->
+				<div class="row">
+					<div class="col-lg-6 d-none d-lg-block">
+						<img class="img-fluid" src="~/img/bg-LongChau.png" />
+					</div>
+					<div class="col-lg-6">
+						<div class="p-5">
+							<a asp-area="" asp-controller="Home" asp-action="Index" class="small">
+								<i class="fas fa-long-arrow-alt-left"></i>
+								Back to Home
+							</a>
+							<div class="text-center">
+								<h1 class="h4 text-gray-900 mb-4">@ViewData["Title"]</h1>
+							</div>
+							<form class="user" id="account" method="post">
+								<div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+								<div class="form-group">
+									<input asp-for="Input.Email" class="form-control form-control-user"
+										   autocomplete="username" aria-required="true"
+										   id="exampleInputEmail" aria-describedby="emailHelp"
+										   placeholder="Enter Email Address...">
+									<span asp-validation-for="Input.Email" class="text-danger"></span>
+
+								</div>
+								<div class="form-group">
+									<input asp-for="Input.Password" type="password" class="form-control form-control-user"
+										   autocomplete="current-password" aria-required="true"
+										   id="exampleInputPassword" placeholder="Password">
+									<span asp-validation-for="Input.Password" class="text-danger"></span>
+
+								</div>
+								<div class="form-group">
+									<div class="custom-control checkbox">
+										<label asp-for="Input.RememberMe" class="form-label">
+											<input class="form-check-input" asp-for="Input.RememberMe" />
+											@Html.DisplayNameFor(m => m.Input.RememberMe)
+										</label>
+									</div>
+								</div>
+								<button id="login-submit" type="submit" class="btn btn-primary btn-user btn-block">Login</button>
+							</form>
+							<hr>
+							<div class="text-center">
+								<a id="forgot-password" asp-page="./ForgotPassword" class="small">Forgot Password?</a>
+							</div>
+							<div class="text-center">
+								<a asp-page="./Register" class="small">Create an account</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+@section Scripts {
+	<partial name="_ValidationScriptsPartial" />
+}
