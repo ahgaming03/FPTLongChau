@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 
 namespace FPTLongChau.Areas.Admin.Models
 {
@@ -9,6 +9,5 @@ namespace FPTLongChau.Areas.Admin.Models
 		public string Title { get; set; }
 		public string? Description { get; set; }
 		public List<Order>? Orders { get; set; }
-
 	}
 }

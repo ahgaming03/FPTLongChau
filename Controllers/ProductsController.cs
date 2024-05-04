@@ -1,6 +1,8 @@
-﻿using FPTLongChau.Data;
+using FPTLongChau.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using FPTLongChau.Areas.Admin.Models;
+using FPTLongChau.Models;
 
 namespace FPTLongChau.Controllers
 {
@@ -13,12 +15,12 @@ namespace FPTLongChau.Controllers
 			_context = context;
 		}
 
-		// GET: Products
-		public async Task<IActionResult> Index()
-		{
-			var applicationDbContext = _context.Products.Include(p => p.Category);
-			return View(await applicationDbContext.ToListAsync());
-		}
+    // GET: Products
+    public async Task<IActionResult> Index()
+    {
+        var products = _context.Products;
+        return View(new ProductViewModel(products));
+    }
 
 		// GET: Products/Details/5
 		public async Task<IActionResult> Details(Guid? id)
