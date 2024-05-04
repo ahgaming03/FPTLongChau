@@ -32,187 +32,20 @@
                                         data-bs-target="#panelsStayOpen-collapseOne"
                                         aria-expanded="true"
                                         aria-controls="panelsStayOpen-collapseOne">
-                                    Related items
+                                    Categories
                                 </button>
                             </h2>
                             <div id="panelsStayOpen-collapseOne" class="accordion-collapse show collapse" aria-labelledby="headingOne">
                                 <div class="accordion-body">
                                     <ul class="list-unstyled">
-                                        <li><a href="#" class="text-dark">Electronics </a></li>
-                                        <li><a href="#" class="text-dark">Home items </a></li>
-                                        <li><a href="#" class="text-dark">Books, Magazines </a></li>
-                                        <li><a href="#" class="text-dark">Men's clothing </a></li>
-                                        <li><a href="#" class="text-dark">Interiors items </a></li>
-                                        <li><a href="#" class="text-dark">Underwears </a></li>
-                                        <li><a href="#" class="text-dark">Shoes for men </a></li>
-                                        <li><a href="#" class="text-dark">Accessories </a></li>
+                                        @foreach (var category in Model.Categories)
+                                        {
+                                            <li>
+                                                <input type="checkbox" name="categories" value="@category.Id" id="category-@category.Id" />
+                                                <label for="category-@category.Id">@category.Title</label>
+                                            </li>
+                                        }
                                     </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingTwo">
-                                <button class="accordion-button text-dark bg-light"
-                                        type="button"
-                                        data-bs-toggle="collapse"
-                                        data-bs-target="#panelsStayOpen-collapseTwo"
-                                        aria-expanded="true"
-                                        aria-controls="panelsStayOpen-collapseTwo">
-                                    Brands
-                                </button>
-                            </h2>
-                            <div id="panelsStayOpen-collapseTwo" class="accordion-collapse show collapse" aria-labelledby="headingTwo">
-                                <div class="accordion-body">
-                                    <div>
-                                        <!-- Checked checkbox -->
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked1" checked />
-                                            <label class="form-check-label" for="flexCheckChecked1">Mercedes</label>
-                                            <span class="badge badge-secondary float-end">120</span>
-                                        </div>
-                                        <!-- Checked checkbox -->
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked2" checked />
-                                            <label class="form-check-label" for="flexCheckChecked2">Toyota</label>
-                                            <span class="badge badge-secondary float-end">15</span>
-                                        </div>
-                                        <!-- Checked checkbox -->
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked3" checked />
-                                            <label class="form-check-label" for="flexCheckChecked3">Mitsubishi</label>
-                                            <span class="badge badge-secondary float-end">35</span>
-                                        </div>
-                                        <!-- Checked checkbox -->
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked4" checked />
-                                            <label class="form-check-label" for="flexCheckChecked4">Nissan</label>
-                                            <span class="badge badge-secondary float-end">89</span>
-                                        </div>
-                                        <!-- Default checkbox -->
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                                            <label class="form-check-label" for="flexCheckDefault">Honda</label>
-                                            <span class="badge badge-secondary float-end">30</span>
-                                        </div>
-                                        <!-- Default checkbox -->
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                                            <label class="form-check-label" for="flexCheckDefault">Suzuki</label>
-                                            <span class="badge badge-secondary float-end">30</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingThree">
-                                <button class="accordion-button text-dark bg-light"
-                                        type="button"
-                                        data-bs-toggle="collapse"
-                                        data-bs-target="#panelsStayOpen-collapseThree"
-                                        aria-expanded="false"
-                                        aria-controls="panelsStayOpen-collapseThree">
-                                    Price
-                                </button>
-                            </h2>
-                            <div id="panelsStayOpen-collapseThree" class="accordion-collapse show collapse" aria-labelledby="headingThree">
-                                <div class="accordion-body">
-                                    <div class="range">
-                                        <input type="range" class="form-range" id="customRange1" />
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-6">
-                                            <p class="mb-0">
-                                                Min
-                                            </p>
-                                            <div class="form-outline">
-                                                <input type="number" id="typeNumber" class="form-control" />
-                                                <label class="form-label" for="typeNumber">$0</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <p class="mb-0">
-                                                Max
-                                            </p>
-                                            <div class="form-outline">
-                                                <input type="number" id="typeNumber" class="form-control" />
-                                                <label class="form-label" for="typeNumber">$1,0000</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <button type="button" class="btn btn-white w-100 border-secondary border">apply</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingThree">
-                                <button class="accordion-button text-dark bg-light"
-                                        type="button"
-                                        data-bs-toggle="collapse"
-                                        data-bs-target="#panelsStayOpen-collapseFour"
-                                        aria-expanded="false"
-                                        aria-controls="panelsStayOpen-collapseFour">
-                                    Size
-                                </button>
-                            </h2>
-                            <div id="panelsStayOpen-collapseFour" class="accordion-collapse show collapse" aria-labelledby="headingThree">
-                                <div class="accordion-body">
-                                    <input type="checkbox" class="btn-check justify-content-center border" id="btn-check1" checked autocomplete="off" />
-                                    <label class="btn btn-white mb-1 px-1" style="width: 60px;" for="btn-check1">XS</label>
-                                    <input type="checkbox" class="btn-check justify-content-center border" id="btn-check2" checked autocomplete="off" />
-                                    <label class="btn btn-white mb-1 px-1" style="width: 60px;" for="btn-check2">SM</label>
-                                    <input type="checkbox" class="btn-check justify-content-center border" id="btn-check3" checked autocomplete="off" />
-                                    <label class="btn btn-white mb-1 px-1" style="width: 60px;" for="btn-check3">LG</label>
-                                    <input type="checkbox" class="btn-check justify-content-center border" id="btn-check4" checked autocomplete="off" />
-                                    <label class="btn btn-white mb-1 px-1" style="width: 60px;" for="btn-check4">XXL</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingThree">
-                                <button class="accordion-button text-dark bg-light"
-                                        type="button"
-                                        data-bs-toggle="collapse"
-                                        data-bs-target="#panelsStayOpen-collapseFive"
-                                        aria-expanded="false"
-                                        aria-controls="panelsStayOpen-collapseFive">
-                                    Ratings
-                                </button>
-                            </h2>
-                            <div id="panelsStayOpen-collapseFive" class="accordion-collapse show collapse" aria-labelledby="headingThree">
-                                <div class="accordion-body">
-                                    <!-- Default checkbox -->
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked />
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                            <i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i>
-                                            <i class="fas fa-star text-warning"></i>
-                                        </label>
-                                    </div>
-                                    <!-- Default checkbox -->
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked />
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                            <i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i>
-                                            <i class="fas fa-star text-secondary"></i>
-                                        </label>
-                                    </div>
-                                    <!-- Default checkbox -->
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked />
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                            <i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star text-secondary"></i>
-                                            <i class="fas fa-star text-secondary"></i>
-                                        </label>
-                                    </div>
-                                    <!-- Default checkbox -->
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked />
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                            <i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star text-secondary"></i><i class="fas fa-star text-secondary"></i>
-                                            <i class="fas fa-star text-secondary"></i>
-                                        </label>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -223,7 +56,6 @@
             <!-- content -->
             <div class="col-lg-9">
                 <header class="d-sm-flex align-items-center border-bottom mb-4 pb-3">
-                    <strong class="d-block py-2">32 Items found </strong>
                     <div class="ms-auto">
                         <select class="form-select d-inline-block pt-1 w-auto border">
                             <option value="0">Best match</option>
@@ -242,8 +74,8 @@
                     </div>
                 </header>
 
-                <div class="row">
-                    @foreach(var product in Model.Products)
+                <div class="row" id="product-list">
+                    @foreach (var product in Model.Products)
                     {
                         <div class="col-lg-4 col-md-6 col-sm-6 d-flex">
                             <div class="card w-100 my-2 shadow-2-strong">
@@ -291,3 +123,29 @@
     </div>
 </section>
 <!-- sidebar + content -->
+@section Scripts {
+    <script>
+        // Handle checkbox event
+        $('input[type="checkbox"][name="categories"]').on('change', function () {
+            var selectedCategories = $('input[type="checkbox"][name="categories"]:checked').map(function () {
+                return $(this).val();
+            }).get();
+
+            $.ajax({
+                URL: '@Url.Action("GetFilteredProducts", "Products")',
+                type: 'POST',
+                dataType: 'html',
+                data: {
+                    categoryids: selectedCategories
+                },
+                success: function (result) {
+                    $('#product-list').html(result);
+                },
+                error: function () {
+                    console.log("Error when post data")
+                }
+            })
+        });
+    </script>
+
+}
