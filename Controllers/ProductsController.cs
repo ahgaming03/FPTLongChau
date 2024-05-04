@@ -24,7 +24,7 @@ namespace FPTLongChau.Controllers
             var viewModel = new ProductViewModel(products,categories);
             return View(viewModel);
         }
-=======
+
 //     // GET: Products
 //     public async Task<IActionResult> Index()
 //     {
@@ -58,11 +58,16 @@ namespace FPTLongChau.Controllers
             return _context.Products.Any(e => e.Id == id);
         }
 
+		[HttpPost]
         public IActionResult GetFilteredProducts(Guid[] categoryIds)
         {
-            var products = _context.Products.Where(p => categoryIds.Contains(p.CategoryId)).ToList();
-            return View(products);
-        }
+            var products = _context.Products
+				.Where(p => categoryIds
+				.Contains(p.CategoryId))
+				.ToList();
+			return PartialView("~/Views/Shared/Products/_ProductCardList.cshtml", products);
+			//return View();
+		}
     }
 
 // 		private bool ProductExists(Guid id)
