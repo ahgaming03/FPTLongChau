@@ -130,13 +130,13 @@
             var selectedCategories = $('input[type="checkbox"][name="categories"]:checked').map(function () {
                 return $(this).val();
             }).get();
-
+            console.log(selectedCategories)
             $.ajax({
                 URL: '@Url.Action("GetFilteredProducts", "Products")',
                 type: 'POST',
                 dataType: 'html',
                 data: {
-                    categoryids: selectedCategories
+                    categoryIds: selectedCategories
                 },
                 success: function (result) {
                     $('#product-list').html(result);
