@@ -41,7 +41,7 @@
                                         @foreach (var category in Model.Categories)
                                         {
                                             <li>
-                                                <input type="checkbox" name="categories" value="@category.Id" id="category-@category.Id" />
+                                                <input type="checkbox" name="categories" value="@category.Id" id="category-@category.Id" checked />
                                                 <label for="category-@category.Id">@category.Title</label>
                                             </li>
                                         }
