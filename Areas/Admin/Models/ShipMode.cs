@@ -2,13 +2,13 @@
 
 namespace FPTLongChau.Areas.Admin.Models
 {
-    public class ShipMode
-    {
-        public Guid Id { get; set; } = Guid.NewGuid();
-        [Required]
-        public string Title { get; set; }
-        public string? Description { get; set; }
-        public List<Order>? Orders { get; set; }
+	public class ShipMode
+	{
+		public Guid Id { get; set; } = Guid.NewGuid();
+		[Required]
+		public string Title { get; set; }
+		public string? Description { get; set; }
+		public List<Order>? Orders { get; set; }
 
-    }
+	}
 }

@@ -1,3 +1,27 @@
-﻿@{
-    Layout = "/Views/Shared/_Layout.cshtml";
+﻿@* @{
+    var layout = Layout; // Preserve the original layout if set
+    if(ViewContext.RouteData.Values["Page"] != null &&
+        (ViewContext.RouteData.Values["Page"].ToString().Contains("/Login") ||
+         ViewContext.RouteData.Values["Page"].ToString().Contains("/Register")))
+    {
+        layout = "~/Areas/Identity/Pages/_AuthLayout.cshtml";
+    }
+    else
+    {
+        layout = "/Views/Shared/_Layout.cshtml";
+    }
+    Layout = layout;
+}
+ *@
+
+@{
+    var page = ViewContext.RouteData.Values["Page"]?.ToString();
+    var layout = page switch
+    {
+        string p when p.Contains("/Login") => "~/Areas/Identity/Pages/_AuthLayout.cshtml",
+        string p when p.Contains("/Register") => "~/Areas/Identity/Pages/_AuthLayout.cshtml",
+        _ => "/Views/Shared/_Layout.cshtml"
+    };
+
+    Layout = layout;
 }
