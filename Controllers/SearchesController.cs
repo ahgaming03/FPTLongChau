@@ -1,82 +1,65 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FPTLongChau.Areas.Admin.Models;
+using FPTLongChau.Data;
+using FPTLongChau.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace FPTLongChau.Controllers
 {
 	public class SearchesController : Controller
 	{
-		// GET: SearchesController
-		public ActionResult Index()
+		private readonly ApplicationDbContext _context;
+		public SearchesController(ApplicationDbContext context)
 		{
-			return View();
+			_context = context;
 		}
+        // GET: Searches/Index
+        public async Task<IActionResult> Index(string searchString)
+        {
+            IQueryable<Product> productsQuery = _context.Products;
 
-		// GET: SearchesController/Details/5
-		public ActionResult Details(int id)
-		{
-			return View();
-		}
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                productsQuery = productsQuery.Where(p => p.Title.Contains(searchString));
+            }
 
-		// GET: SearchesController/Create
-		public ActionResult Create()
-		{
-			return View();
-		}
+            var products = await productsQuery.ToListAsync();
 
-		// POST: SearchesController/Create
-		[HttpPost]
-		[ValidateAntiForgeryToken]
-		public ActionResult Create(IFormCollection collection)
-		{
-			try
-			{
-				return RedirectToAction(nameof(Index));
-			}
-			catch
-			{
-				return View();
-			}
-		}
+            // Fetch the categories associated with the filtered products
+            var categories = await _context.Categories.ToListAsync();
 
-		// GET: SearchesController/Edit/5
-		public ActionResult Edit(int id)
-		{
-			return View();
-		}
+            var viewModel = new ProductViewModel(products, categories, searchString);
 
-		// POST: SearchesController/Edit/5
-		[HttpPost]
-		[ValidateAntiForgeryToken]
-		public ActionResult Edit(int id, IFormCollection collection)
-		{
-			try
-			{
-				return RedirectToAction(nameof(Index));
-			}
-			catch
-			{
-				return View();
-			}
-		}
+            return View(viewModel);
+        }
 
-		// GET: SearchesController/Delete/5
-		public ActionResult Delete(int id)
-		{
-			return View();
-		}
+        [HttpPost]
+        public async Task<IActionResult> GetFilteredProducts(Guid[] categoryIds, string searchString)
+        {
+            IQueryable<Product> productsQuery = _context.Products;
 
-		// POST: SearchesController/Delete/5
-		[HttpPost]
-		[ValidateAntiForgeryToken]
-		public ActionResult Delete(int id, IFormCollection collection)
-		{
-			try
-			{
-				return RedirectToAction(nameof(Index));
-			}
-			catch
-			{
-				return View();
-			}
-		}
-	}
+            // Check if categoryIds is null or empty
+            if (categoryIds == null || categoryIds.Length == 0)
+            {
+                // If no categories are selected, return an empty list
+                return PartialView("~/Views/Shared/Products/_ProductCardList.cshtml", new List<Product>());
+            }
+            else
+            {
+                // If categories are selected, filter products by categories
+                productsQuery = productsQuery.Where(p => categoryIds.Contains(p.CategoryId));
+
+                // If searchString is not null or empty, further filter products by search string
+                if (!String.IsNullOrEmpty(searchString))
+                {
+                    productsQuery = productsQuery.Where(p => p.Title.Contains(searchString));
+                }
+
+                var products = await productsQuery.ToListAsync();
+
+                return PartialView("~/Views/Shared/Products/_ProductCardList.cshtml", products);
+            }
+        }
+    }
 }

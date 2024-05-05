@@ -66,7 +66,6 @@ namespace FPTLongChau.Controllers
 				.Contains(p.CategoryId))
 				.ToList();
 			return PartialView("~/Views/Shared/Products/_ProductCardList.cshtml", products);
-			//return View();
 		}
     }
 
