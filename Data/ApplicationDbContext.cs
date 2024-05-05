@@ -18,8 +18,6 @@ namespace FPTLongChau.Data
 		public DbSet<Supplier> Suppliers { get; set; }
 		public DbSet<OrderDetail> OrderDetails { get; set; }
 		public DbSet<Storage> Storages { get; set; }
-		public DbSet<ShipMode> ShipModes { get; set; }
-		public DbSet<DeliveryInformation> DeliveryInformations { get; set; }
 		public DbSet<PayMode> PayModes { get; set; }
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
