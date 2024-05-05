@@ -12,6 +12,7 @@ namespace FPTLongChau.Areas.Admin.Models
 		public string Address { get; set; }
 		public string PhoneNumber { get; set; }
 		public Guid PayModeId { get; set; }
+		public decimal? TotalPrice { get; set; }
 		public virtual ApplicationUser? Customer { get; set; }
 		public List<OrderDetail>? OrderDetails { get; set; }
 		public PayMode? PayMode { get; set; }

@@ -111,8 +111,8 @@ namespace FPTLongChau.Controllers
 				order.Customer = user;
 
 				order.Id = Guid.NewGuid();
-				_context.Add(order);
-				await _context.SaveChangesAsync();
+
+				var totalPrice = 0.0;
 
 				var cartItems = JsonConvert.DeserializeObject<List<CartItem>>(shoppingCart);
 				foreach(var item in cartItems)
@@ -122,11 +122,13 @@ namespace FPTLongChau.Controllers
 					{
 						ProductId = item.Id,
 						Quantity = item.Quantity,
-						OrderId = order.Id
+						OrderId = order.Id,
 					};
+					totalPrice += item.Quantity * product.Price;
 					_context.OrderDetails.Add(orderDetail);
 				}
-
+				order.TotalPrice = (decimal)Math.Round(totalPrice, 2);
+				_context.Add(order);
 				await _context.SaveChangesAsync();
 				_toastNotification.AddSuccessToastMessage("Order placed successfully");
 
@@ -134,7 +136,7 @@ namespace FPTLongChau.Controllers
 				return Content(script, "text/html");
 			}
 			ViewData["PayModeId"] = new SelectList(_context.PayModes, "Id", "Title");
-			return View("Purchase",order);
+			return View("Purchase", order);
 		}
 
 	}
