@@ -1,4 +1,4 @@
-﻿@model FPTLongChau.Areas.Admin.Models.Product;
+@model FPTLongChau.Areas.Admin.Models.Product;
 @{
 	var product = Model;
 }
@@ -34,6 +34,7 @@
 			</h5>
 			<p class="card-text">$@Html.DisplayFor(modelItem => product.Price)</p>
 			<div class="card-footer d-flex align-items-end pt-3 px-0 pb-0 mt-auto">
+
 				<a onclick="AddItemToCart(`@product.Id`)"
 						class="btn btn-primary shadow-0 me-1">
 					Add to cart

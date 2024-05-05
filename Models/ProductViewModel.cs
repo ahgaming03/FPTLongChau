@@ -5,15 +5,20 @@ namespace FPTLongChau.Models
 	{
 		public IEnumerable<Product> Products { get; set; }
 		public IEnumerable<Category> Categories { get; set; }
-		public ProductViewModel(IEnumerable<Product> products, IEnumerable<Category> categories)
+		public string SearchString { get; set; }
+
+        public ProductViewModel(IEnumerable<Product> products, IEnumerable<Category> categories)
 		{
 			Products = products;
 			Categories = categories;
 		}
 
-        public ProductViewModel(IEnumerable<Product> products)
+
+        public ProductViewModel(IEnumerable<Product> products,IEnumerable<Category> categories, String searchString)
         {
             Products = products;
+			      Categories = categories;
+			      SearchString = searchString;
         }
     }
 }

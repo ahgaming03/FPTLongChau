@@ -16,28 +16,14 @@
             <!-- Left links -->
             <ul class="navbar-nav mb-2 mb-lg-0 me-auto">
                 <!-- Categories dropdown -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Categories
-                    </a>
-                    <!-- Dropdown menu -->
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li>
-                            <a class="dropdown-item" href="#">Action</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="#">Another action</a>
-                        </li>
-                    </ul>
-                </li>
                 <li class="nav-item">
                     <a class="nav-link" asp-action="Index" asp-controller="Products" asp-area="">Products</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">About us</a>
+                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="AboutUs">About us</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Contact us</a>
+                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Contact">Contact us</a>
                 </li>
             </ul>
             <!-- Left links -->
