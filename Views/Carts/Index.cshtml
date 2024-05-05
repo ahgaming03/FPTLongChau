@@ -41,17 +41,19 @@
 					<div class="card-body">
 						<div class="d-flex justify-content-between">
 							<p class="mb-2">Total price:</p>
-							<p class="mb-2 fw-bold">1,500.00</p>
+							<p class="mb-2 fw-bold">$<span id="totalPrice">0</span></p>
 						</div>
 						<hr />
 
 						<div class="mt-3">
 							<a class="btn btn-success w-100 shadow-0 mb-2"
-							   asp-controller="Purchases"
-							   asp-action="Index">
+							   asp-area=""
+							   asp-controller="Carts"
+							   asp-action="Purchase">
 								Make Purchase
 							</a>
 							<a class="btn btn-light w-100 mt-2 border"
+							   asp-area=""
 							   asp-controller="Home"
 							   asp-action="Index">
 								Back to shop

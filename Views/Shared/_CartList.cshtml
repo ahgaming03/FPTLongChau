@@ -47,11 +47,26 @@
 			</div>
 		</div>
 		<div class="col-lg-2 col-sm-6 col-6 d-flex flex-lg-column flex-xl-row flex-row text-nowrap">
-			<div class="">
-				<input type="number" class="form-input me-4" value="@product.Quantity" min="1" max="20" style="width: 50px" />
+			<div class="me-4">
+				<div class="">
+					<div class="input-group" style="width: 120px;">
+						<button onclick="DecreaseItemQuantity(`@product.Id`)" class="btn btn-white border-secondary px-2 border" type="button">
+							<i class="fas fa-minus"></i>
+						</button>
+						<input type="text" class="form-control border-secondary border text-center" value="@product.Quantity" disabled />
+						@if(product.Quantity < 10)
+						{
+							<button onclick="AddItemToCart(`@product.Id`)" class="btn btn-white border-secondary px-2 border" type="button">
+								<i class="fas fa-plus"></i>
+							</button>
+						}
+
+					</div>
+				</div>
 			</div>
+
 			<div class="">
-				<text class="h6">$@Html.DisplayFor(modelItem => product.Price)</text>
+				<text class="h6">$<span>@Html.DisplayFor(modelItem => product.TotalPrice)</span></text>
 				<br />
 				<small class="text-muted text-nowrap">
 					$@Html.DisplayFor(modelItem => product.Price) / per item
@@ -60,8 +75,8 @@
 		</div>
 		<div class="col-lg col-sm-6 d-flex justify-content-sm-center justify-content-md-start justify-content-lg-center justify-content-xl-end mb-2">
 			<div class="float-md-end">
-				<button onclick="RemoveItemFromCart('@product.Id')"
-				   class="btn btn-light text-danger icon-hover-danger border">
+				<button onclick="RemoveItemFromCart(`@product.Id`)"
+						class="btn btn-light text-danger icon-hover-danger border">
 					Remove
 				</button>
 			</div>
