@@ -4,6 +4,7 @@ using FPTLongChau.Options;
 using FPTLongChau.Services.Abstract;
 using FPTLongChau.Services.Concrete;
 using Microsoft.EntityFrameworkCore;
+using NToastNotify;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,8 +18,16 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.R
 	.AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
+// Toast
+builder.Services.AddRazorPages().AddNToastNotifyNoty(new NotyOptions
+{
+	ProgressBar = true,
+	Timeout = 5000,
+});
+
 var services = builder.Services;
 
+// Storage
 services.Configure<AzureOptions>(builder.Configuration.GetSection("Azure"));
 services.AddTransient<IImageService, ImageService>();
 
@@ -54,6 +63,8 @@ app.UseEndpoints(endpoints =>
 app.MapControllerRoute(
 	name: "default",
 	pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.UseNToastNotify();
 app.MapRazorPages();
 
 app.Run();

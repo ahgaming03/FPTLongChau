@@ -2,7 +2,12 @@
 using FPTLongChau.Data;
 using FPTLongChau.Models;
 using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.VisualBasic;
+using Newtonsoft.Json;
+using NToastNotify;
 using System.ComponentModel.DataAnnotations;
 
 namespace FPTLongChau.Controllers
@@ -10,10 +15,14 @@ namespace FPTLongChau.Controllers
 	public class CartsController : Controller
 	{
 		private readonly ApplicationDbContext _context;
+		private readonly IToastNotification _toastNotification;
+		private readonly UserManager<ApplicationUser> _userManager;
 
-		public CartsController(ApplicationDbContext context)
+		public CartsController(ApplicationDbContext context, IToastNotification toastNotification, UserManager<ApplicationUser> userManager)
 		{
 			_context = context;
+			_toastNotification = toastNotification;
+			_userManager = userManager;
 		}
 		// GET: Carts
 		public async Task<ActionResult> Index()
@@ -22,9 +31,11 @@ namespace FPTLongChau.Controllers
 		}
 
 		//POST: Carts/ViewCart
-	   [HttpPost]
+		[HttpPost]
 		public async Task<ActionResult> ViewCart([FromBody] List<CartItem> cartItems)
 		{
+
+
 			var prodcuts = new List<CartItemViewModel>();
 			foreach(var item in cartItems)
 			{
@@ -39,7 +50,7 @@ namespace FPTLongChau.Controllers
 					TotalPrice = Math.Round(item.Quantity * product.Price, 2)
 				});
 			}
-
+			_toastNotification.AddSuccessToastMessage("Cart updated successfully");
 			return PartialView("_CartList", prodcuts);
 		}
 
@@ -54,12 +65,13 @@ namespace FPTLongChau.Controllers
 				totalPrice += item.Quantity * product.Price;
 			}
 
-			return Ok( Math.Round(totalPrice, 2) );
+			return Ok(Math.Round(totalPrice, 2));
 		}
 
 		//Get: Carts/Purchase
 		public async Task<ActionResult> Purchase()
 		{
+			ViewData["PayModeId"] = new SelectList(_context.PayModes, "Id", "Title");
 			return View();
 		}
 
@@ -87,6 +99,42 @@ namespace FPTLongChau.Controllers
 
 
 			return PartialView("_Receipt", prodcuts);
+		}
+
+		//POST: Carts/Checkout
+		[HttpPost]
+		public async Task<ActionResult> Checkout([Bind("Id,FirstName,LastName,Address,PhoneNumber,PayModeId")] Order order, string shoppingCart)
+		{
+			if(ModelState.IsValid)
+			{
+				ApplicationUser user = await _userManager.GetUserAsync(User);
+				order.Customer = user;
+
+				order.Id = Guid.NewGuid();
+				_context.Add(order);
+				await _context.SaveChangesAsync();
+
+				var cartItems = JsonConvert.DeserializeObject<List<CartItem>>(shoppingCart);
+				foreach(var item in cartItems)
+				{
+					var product = await _context.Products.FindAsync(item.Id);
+					var orderDetail = new OrderDetail
+					{
+						ProductId = item.Id,
+						Quantity = item.Quantity,
+						OrderId = order.Id
+					};
+					_context.OrderDetails.Add(orderDetail);
+				}
+
+				await _context.SaveChangesAsync();
+				_toastNotification.AddSuccessToastMessage("Order placed successfully");
+
+				string script = "<script>localStorage.removeItem('shoppingCart'); window.location.href='/';</script>";
+				return Content(script, "text/html");
+			}
+			ViewData["PayModeId"] = new SelectList(_context.PayModes, "Id", "Title");
+			return View("Purchase",order);
 		}
 
 	}

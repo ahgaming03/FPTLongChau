@@ -1,4 +1,6 @@
-﻿@* @model List<FPTLongChau.Areas.Admin.Models.Product>; *@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+
 @{
 	ViewData["Title"] = "Shopping Cart";
 }
@@ -46,12 +48,23 @@
 						<hr />
 
 						<div class="mt-3">
-							<a class="btn btn-success w-100 shadow-0 mb-2"
-							   asp-area=""
-							   asp-controller="Carts"
-							   asp-action="Purchase">
-								Make Purchase
-							</a>
+							@if(SignInManager.IsSignedIn(User))
+							{
+								<a class="btn btn-success w-100 shadow-0 mb-2"
+									asp-area=""
+									asp-controller="Carts"
+									asp-action="Purchase">
+									Make Purchase
+								</a>
+							}
+							else
+							{
+								<a class="btn btn-success w-100 shadow-0 mb-2"
+								   asp-area="Identity"
+								   asp-page="/Account/Login">
+									Sign in to purchase
+								</a>
+							}
 							<a class="btn btn-light w-100 mt-2 border"
 							   asp-area=""
 							   asp-controller="Home"
