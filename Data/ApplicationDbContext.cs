@@ -15,10 +15,8 @@ namespace FPTLongChau.Data
 		public DbSet<Category> Categories { get; set; }
 		public DbSet<ApplicationUser> Customers { get; set; }
 		public DbSet<Order> Orders { get; set; }
-		public DbSet<Rank> Ranks { get; set; }
 		public DbSet<Supplier> Suppliers { get; set; }
 		public DbSet<OrderDetail> OrderDetails { get; set; }
-		public DbSet<Unit> Units { get; set; }
 		public DbSet<Storage> Storages { get; set; }
 		public DbSet<ShipMode> ShipModes { get; set; }
 		public DbSet<DeliveryInformation> DeliveryInformations { get; set; }

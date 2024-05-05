@@ -19,6 +19,5 @@ namespace FPTLongChau.Areas.Admin.Models
 		public Category? Category { get; set; }
 		public List<OrderDetail>? OrderDetails { get; set; }
 		public List<Storage>? Storages { get; set; }
-		public List<Unit>? Units { get; set; }
 	}
 }
