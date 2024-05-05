@@ -1,6 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@* @model List<FPTLongChau.Areas.Admin.Models.Product>; *@
 @{
 	ViewData["Title"] = "Shopping Cart";
 }
@@ -15,56 +13,10 @@
 						<h4 class="card-title mb-4">
 							Your shopping cart
 						</h4>
-						@for(var i = 0; i < 3; i++)
-						{
-							<div class="row gy-3 mb-4">
-								<div class="col-lg-5">
-									<div class="me-lg-5">
-										<div class="d-flex">
-											<img src="https://placewaifu.com/image/@(i * 100 + 100)"
-												 class="me-3 rounded border"
-												 style="
-                                                        width: 96px;
-                                                        height: 96px;
-																" />
-											<div class="">
-												<a href="#" class="nav-link">
-													Winter jacket for men
-													and lady
-												</a>
-												<p class="text-muted">
-													Yellow, Jeans
-												</p>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-lg-2 col-sm-6 col-6 d-flex flex-lg-column flex-xl-row flex-row text-nowrap">
-									<div class="">
-										<input type="number" class="form-input me-4" value="1" min="1" max="20" style="width: 50px" />
-									</div>
-									<div class="">
-										<text class="h6">$500.00</text>
-										<br />
-										<small class="text-muted text-nowrap">
-											$500.00 / per item
-										</small>
-									</div>
-								</div>
-								<div class="col-lg col-sm-6 d-flex justify-content-sm-center justify-content-md-start justify-content-lg-center justify-content-xl-end mb-2">
-									<div class="float-md-end">
-										<a href="#!"
-										   class="btn btn-light px-2 icon-hover-primary border">
-											<i class="fas fa-heart fa-lg px-1 text-secondary"></i>
-										</a>
-										<a href="#"
-										   class="btn btn-light text-danger icon-hover-danger border">
-											Remove
-										</a>
-									</div>
-								</div>
-							</div>
-						}
+						<div id="cartList">
+							@* @await Html.PartialAsync("_CartList", Model) *@
+						</div>
+
 					</div>
 
 					<div class="border-top pt-4 mx-4 mb-4">
@@ -155,4 +107,4 @@
 		</div>
 	</div>
 </section>
-<!-- Recommended -->
+

@@ -1,0 +1,9 @@
+﻿@model List<FPTLongChau.Areas.Admin.Models.Product>;
+@{
+	var products = Model;
+}
+
+@foreach(var product in products)
+{
+	@await Html.PartialAsync("~/Views/Shared/Products/_ProductCard.cshtml", product)
+}
