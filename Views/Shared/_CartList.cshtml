@@ -1,0 +1,70 @@
+﻿@model List<FPTLongChau.Models.CartItemViewModel>;
+
+@{
+	var products = Model;
+}
+@if(products.Count == 0)
+{
+	<h2 class="text-danger fw-bold">Your card is empty</h2>
+}
+@foreach(var product in products)
+{
+	<div class="row gy-3 mb-4">
+		<div class="col-lg-5">
+			<div class="me-lg-5">
+				<div class="d-flex">
+					@if(product.Image != null)
+					{
+						<img src="https://pharmacitylongchau.blob.core.windows.net/imagecontainer/@Html.DisplayFor(modelItem => product.Image)"
+							 class="me-3 rounded border"
+							 style="width: 96px;
+                            height: 96px;"
+							 alt="@Html.DisplayFor(modelItem => product.Title)" />
+					}
+					else
+					{
+						<img src="~/img/default_image.jpg"
+							 class="me-3 rounded border"
+							 style="width: 96px;
+                            height: 96px;"
+							 alt="@Html.DisplayFor(modelItem => product.Title)" />
+					}
+					<div class="">
+						<a asp-area="" asp-controller="Products" asp-action="Details" asp-route-id="@product.Id" class="nav-link" title="@Html.DisplayFor(modelItem => product.Title)">
+							@{
+								if(product.Title.Length >= 30)
+								{
+									product.Title = product.Title.Substring(0, 30) + "...";
+								}
+							}
+							@Html.DisplayFor(modelItem => product.Title)
+						</a>
+						<p class="text-muted">
+							@Html.DisplayFor(modelItem => product.Category)
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-2 col-sm-6 col-6 d-flex flex-lg-column flex-xl-row flex-row text-nowrap">
+			<div class="">
+				<input type="number" class="form-input me-4" value="@product.Quantity" min="1" max="20" style="width: 50px" />
+			</div>
+			<div class="">
+				<text class="h6">$@Html.DisplayFor(modelItem => product.Price)</text>
+				<br />
+				<small class="text-muted text-nowrap">
+					$@Html.DisplayFor(modelItem => product.Price) / per item
+				</small>
+			</div>
+		</div>
+		<div class="col-lg col-sm-6 d-flex justify-content-sm-center justify-content-md-start justify-content-lg-center justify-content-xl-end mb-2">
+			<div class="float-md-end">
+				<button onclick="RemoveItemFromCart('@product.Id')"
+				   class="btn btn-light text-danger icon-hover-danger border">
+					Remove
+				</button>
+			</div>
+		</div>
+	</div>
+}

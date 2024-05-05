@@ -1,58 +1,51 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FPTLongChau.Areas.Admin.Models;
+using FPTLongChau.Data;
+using FPTLongChau.Models;
+using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
+using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace FPTLongChau.Controllers
 {
 	public class CartsController : Controller
 	{
-		// GET: CartsController
-		public ActionResult Index()
+		private readonly ApplicationDbContext _context;
+
+		public CartsController(ApplicationDbContext context)
+		{
+			_context = context;
+		}
+		// GET: Carts
+		public async Task<ActionResult> Index()
 		{
 			return View();
 		}
 
-		// POST: CartsController/Create
-		[HttpPost]
-		[ValidateAntiForgeryToken]
-		public ActionResult Create(IFormCollection collection)
+		//POST: Carts/ViewCart
+	   [HttpPost]
+		public async Task<ActionResult> ViewCart([FromBody] List<CartItem> cartItems)
 		{
-			try
+
+
+			var prodcuts = new List<CartItemViewModel>();
+			foreach(var item in cartItems)
 			{
-				return RedirectToAction(nameof(Index));
+				var product = await _context.Products.FindAsync(item.Id);
+				prodcuts.Add(new CartItemViewModel
+				{
+					Id = item.Id,
+					Price = product.Price,
+					Title = product.Title,
+					Image = product.Image,
+					Quantity = item.Quantity
+				});
 			}
-			catch
-			{
-				return View();
-			}
+
+			return PartialView("_CartList", prodcuts);
 		}
 
-		// POST: CartsController/Edit/5
-		[HttpPost]
-		[ValidateAntiForgeryToken]
-		public ActionResult Edit(int id, IFormCollection collection)
-		{
-			try
-			{
-				return RedirectToAction(nameof(Index));
-			}
-			catch
-			{
-				return View();
-			}
-		}
 
-		// POST: CartsController/Delete/5
-		[HttpPost]
-		[ValidateAntiForgeryToken]
-		public ActionResult Delete(int id, IFormCollection collection)
-		{
-			try
-			{
-				return RedirectToAction(nameof(Index));
-			}
-			catch
-			{
-				return View();
-			}
-		}
+
+
 	}
 }

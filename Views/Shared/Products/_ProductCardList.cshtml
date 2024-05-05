@@ -5,44 +5,5 @@
 
 @foreach(var product in products)
 {
-	<div class="col-lg-4 col-md-6 col-sm-6 d-flex">
-		<div class="card w-100 my-2 shadow-2-strong">
-			@if(product.Image != null)
-			{
-				<img src="https://pharmacitylongchau.blob.core.windows.net/imagecontainer/@Html.DisplayFor(modelItem => product.Image)"
-					 class="card-img-top"
-					 style="aspect-ratio: 1 / 1"
-					 alt="@Html.DisplayFor(modelItem => product.Title)" />
-			}
-			else
-			{
-				<img src="~/img/default_image.jpg"
-					 class="card-img-top"
-					 style="aspect-ratio: 1 / 1"
-					 alt="@Html.DisplayFor(modelItem => product.Title)" />
-			}
-			<div class="card-body d-flex flex-column">
-				<h5 class="card-title" title="@Html.DisplayFor(modelItem => product.Title)">
-					<a class="text-reset" asp-area="" asp-controller="Products" asp-action="Details" asp-route-id="@product.Id">
-						@{
-							if(product.Title.Length >= 30)
-							{
-								product.Title = product.Title.Substring(0, 30) + "...";
-							}
-						}
-						@Html.DisplayFor(modelItem => product.Title)
-					</a>
-				</h5>
-				<p class="card-text">$@Html.DisplayFor(modelItem => product.Price)</p>
-				<div class="card-footer d-flex align-items-end pt-3 px-0 pb-0 mt-auto">
-					<a href="#!"
-					   class="btn btn-primary shadow-0 me-1">Add to cart</a>
-					<a href="#!"
-					   class="btn btn-light px-2 pt-2 icon-hover border">
-						<i class="fas fa-heart fa-lg text-secondary px-1"></i>
-					</a>
-				</div>
-			</div>
-		</div>
-	</div>
+	@await Html.PartialAsync("~/Views/Shared/Products/_ProductCard.cshtml", product)
 }

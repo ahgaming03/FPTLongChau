@@ -1,4 +1,4 @@
-﻿@model FPTLongChau.Areas.Admin.Models.Product;
+@model FPTLongChau.Areas.Admin.Models.Product;
 @{
 	var product = Model;
 }
@@ -34,13 +34,17 @@
 			</h5>
 			<p class="card-text">$@Html.DisplayFor(modelItem => product.Price)</p>
 			<div class="card-footer d-flex align-items-end pt-3 px-0 pb-0 mt-auto">
-				<a href="#!"
-				   class="btn btn-primary shadow-0 me-1">Add to cart</a>
-				<a href="#!"
-				   class="btn btn-light px-2 pt-2 icon-hover border">
-					<i class="fas fa-heart fa-lg text-secondary px-1"></i>
+
+				<a onclick="AddItemToCart(`@product.Id`)"
+						class="btn btn-primary shadow-0 me-1">
+					Add to cart
 				</a>
+
 			</div>
 		</div>
 	</div>
 </div>
+
+@section Scripts {
+	<script src="~/js/ShoppingCart.js"></script>
+}
