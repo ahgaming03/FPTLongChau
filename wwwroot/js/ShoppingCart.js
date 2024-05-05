@@ -16,6 +16,21 @@ function AddItemToCart(id, quantity = 1) {
         found.quantity += quantity; // Increase quantity if item exists
     }
     SaveCart(cart);
+    LoadCartItems();
+}
+
+function DecreaseItemQuantity(id) {
+    var cart = LoadCart();
+    var found = cart.find(p => p.id === id);
+    if (found !== undefined) {
+        found.quantity -= 1; // Decrease quantity
+        if (found.quantity <= 0) {
+            RemoveItemFromCart(id);
+            return;
+        }
+    }
+    SaveCart(cart);
+    LoadCartItems();
 }
 
 function RemoveItemFromCart(id) {
@@ -47,15 +62,39 @@ async function LoadCartItems() {
         contentType: 'application/json',
         data: JSON.stringify(cart),
         success: function (result) {
-            console.log(result)
             $("#cartList").html(result);
         },
         error: function (error) {
             console.log("Error in sending data to server: ", error)
         }
     })
-
+    TotalCartPrice();
 }
+
+async function TotalCartPrice() {
+    let cart = LoadCart();
+
+    $.ajax({
+        url: `/Carts/TotalCartPrice/`,
+        type: "POST",
+        contentType: 'application/json',
+        data: JSON.stringify(cart),
+        success: function (result) {
+            $("#totalPrice").html(result);
+        },
+        error: function (error) {
+            console.log("Error in sending data to server: ", error)
+        }
+    })
+}
+
+async function ClearCart() {
+    localStorage.removeItem("shoppingCart");
+    LoadCartItems();
+}
+
 document.addEventListener('DOMContentLoaded', function () {
     LoadCartItems();
+    TotalCartPrice();
 });
+

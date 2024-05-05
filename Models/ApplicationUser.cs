@@ -14,5 +14,7 @@ namespace FPTLongChau.Models
 		[MinLength(5)]
 		public string? UserName { get; set; }
 		public DateTime? Birthday { get; set; }
+		[MaxLength(1000)]
+		public string? Address { get; set; }
 	}
 }
