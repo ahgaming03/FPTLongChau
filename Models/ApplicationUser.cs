@@ -14,6 +14,5 @@ namespace FPTLongChau.Models
 		[MinLength(5)]
 		public string? UserName { get; set; }
 		public DateTime? Birthday { get; set; }
-		public Rank? Rank { get; set; }
 	}
 }
