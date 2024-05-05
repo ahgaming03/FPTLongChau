@@ -13,11 +13,12 @@ namespace FPTLongChau.Models
 			Categories = categories;
 		}
 
+
         public ProductViewModel(IEnumerable<Product> products,IEnumerable<Category> categories, String searchString)
         {
             Products = products;
-			Categories = categories;
-			SearchString = searchString;
+			      Categories = categories;
+			      SearchString = searchString;
         }
     }
 }
