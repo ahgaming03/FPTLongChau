@@ -1,8 +1,10 @@
-﻿@* @{
+﻿@{
     var layout = Layout; // Preserve the original layout if set
     if(ViewContext.RouteData.Values["Page"] != null &&
         (ViewContext.RouteData.Values["Page"].ToString().Contains("/Login") ||
-         ViewContext.RouteData.Values["Page"].ToString().Contains("/Register")))
+         ViewContext.RouteData.Values["Page"].ToString().Contains("/Register") ||
+         ViewContext.RouteData.Values["Page"].ToString().Contains("/ForgotPassword") 
+         ))
     {
         layout = "~/Areas/Identity/Pages/_AuthLayout.cshtml";
     }
@@ -12,8 +14,8 @@
     }
     Layout = layout;
 }
- *@
 
+@* 
 @{
     var page = ViewContext.RouteData.Values["Page"]?.ToString();
     var layout = page switch
@@ -24,4 +26,4 @@
     };
 
     Layout = layout;
-}
+} *@

@@ -5,6 +5,7 @@ using FPTLongChau.Services.Abstract;
 using FPTLongChau.Services.Concrete;
 using Microsoft.EntityFrameworkCore;
 using NToastNotify;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
