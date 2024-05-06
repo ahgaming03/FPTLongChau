@@ -59,21 +59,7 @@
 
 					<hr />
 
-					<div class="row mb-4">
-						<div class="col-md-4 col-6 mb-3">
-							<label class="mb-2 d-block">Quantity</label>
-							<div class="input-group mb-3" style="width: 170px;">
-								<button class="btn btn-white border-secondary px-3 border" type="button" id="button-addon1" data-bs-ripple-color="dark">
-									<i class="fas fa-minus"></i>
-								</button>
-								<input type="text" class="form-control border-secondary border text-center" placeholder="14" aria-label="Example text with button addon" aria-describedby="button-addon1" disabled />
-								<button class="btn btn-white border-secondary px-3 border" type="button" id="button-addon2" data-bs-ripple-color="dark">
-									<i class="fas fa-plus"></i>
-								</button>
-							</div>
-						</div>
-					</div>
-					<a href="#" class="btn btn-primary shadow-0"> <i class="me-1 fa fa-shopping-basket"></i> Add to cart </a>
+					<a asp-area="" asp-controller="Carts" asp-action="Index" onclick="AddItemToCart(`@Model.Id`)" class="btn btn-primary shadow-0"> <i class="me-1 fa fa-shopping-basket"></i> Add to cart </a>
 				</div>
 			</main>
 		</div>

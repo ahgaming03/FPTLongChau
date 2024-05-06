@@ -79,21 +79,8 @@
                 <div class="row" id="product-list">
                     @foreach (var product in Model.Products)
                     {
-                        <div class="col-lg-4 col-md-6 col-sm-6 d-flex">
-                            <div class="card w-100 my-2 shadow-2-strong">
-                                <img src="https://pharmacitylongchau.blob.core.windows.net/imagecontainer/@Html.DisplayFor(modelItem => product.Image)" class="card-img-top" />
-                                <div class="card-body d-flex flex-column">
-                                    <div class="d-flex flex-row">
-                                        <h5 class="mb-1 me-1">$@Html.DisplayFor(modelItem => product.Price)</h5>
-                                    </div>
-                                    <p class="card-text">@Html.DisplayFor(modelItem => product.Title)</p>
-                                    <div class="card-footer d-flex align-items-end pt-3 px-0 pb-0 mt-auto">
-                                        <a href="#!" class="btn btn-primary shadow-0 me-1">Add to cart</a>
-                                        <a href="#!" class="btn btn-light icon-hover px-2 pt-2 border"><i class="fas fa-heart fa-lg text-secondary px-1"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @await Html.PartialAsync("~/Views/Shared/Products/_ProductCard.cshtml", product)
+
                     }
                 </div>
 

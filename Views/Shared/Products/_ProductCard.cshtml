@@ -35,8 +35,9 @@
 			<p class="card-text">$@Html.DisplayFor(modelItem => product.Price)</p>
 			<div class="card-footer d-flex align-items-end pt-3 px-0 pb-0 mt-auto">
 
-				<a onclick="AddItemToCart(`@product.Id`)"
-						class="btn btn-primary shadow-0 me-1">
+				<a asp-area="" asp-controller="Carts" asp-action="Index"
+				   onclick="AddItemToCart(`@product.Id`)"
+				   class="btn btn-primary shadow-0 me-1 liveToastBtn">
 					Add to cart
 				</a>
 
