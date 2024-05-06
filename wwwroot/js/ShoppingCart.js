@@ -7,6 +7,7 @@ function LoadCart() {
     return cart ? JSON.parse(cart) : [];
 }
 
+// Add item to cart
 function AddItemToCart(id, quantity = 1) {
     var cart = LoadCart();
     var found = cart.find(p => p.id === id);
@@ -19,6 +20,7 @@ function AddItemToCart(id, quantity = 1) {
     LoadCartItems();
 }
 
+// Descrease item quantity
 function DecreaseItemQuantity(id) {
     var cart = LoadCart();
     var found = cart.find(p => p.id === id);
@@ -33,6 +35,7 @@ function DecreaseItemQuantity(id) {
     LoadCartItems();
 }
 
+// Remove item from cart
 function RemoveItemFromCart(id) {
     var cart = LoadCart();
     var index = cart.findIndex(p => p.id === id);
