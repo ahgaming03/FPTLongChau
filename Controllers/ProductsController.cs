@@ -25,13 +25,6 @@ namespace FPTLongChau.Controllers
             return View(viewModel);
         }
 
-//     // GET: Products
-//     public async Task<IActionResult> Index()
-//     {
-//         var products = _context.Products;
-//         return View(new ProductViewModel(products));
-//     }
-
 
 		// GET: Products/Details/5
 		public async Task<IActionResult> Details(Guid? id)
@@ -68,11 +61,5 @@ namespace FPTLongChau.Controllers
 			return PartialView("~/Views/Shared/Products/_ProductCardList.cshtml", products);
 		}
     }
-
-// 		private bool ProductExists(Guid id)
-// 		{
-// 			return _context.Products.Any(e => e.Id == id);
-// 		}
-// 	}
 
 }

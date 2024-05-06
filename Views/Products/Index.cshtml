@@ -117,7 +117,7 @@
             var selectedCategories = $('input[type="checkbox"][name="categories"]:checked').map(function () {
                 return $(this).val();
             }).get();
-            console.log(selectedCategories)
+     
             $.ajax({
                 url: `@Url.Action("GetFilteredProducts", "Products")`,
                 type: 'POST',

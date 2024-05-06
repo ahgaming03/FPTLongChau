@@ -53,7 +53,7 @@
                                 @Html.DisplayFor(modelItem => item.Time)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.TotalPrice)
+                                $ @Html.DisplayFor(modelItem => item.TotalPrice)
                             </td>
                             <td>
                                 @if ( item.Status == 0)
@@ -69,7 +69,26 @@
 
                                 @if (item.Status == 1)
                                 {
-                                    <a class="btn btn-info">Confirmed</a>
+                                    <a class="btn btn-info"
+                                       asp-area="Admin"
+                                       asp-controller="Orders"
+                                       asp-action="ChangeStatus"
+                                       asp-route-Status="2"
+                                       asp-route-Id="@item.Id">Confirmed</a>
+                                }
+
+                                @if (item.Status == 2)
+                                {
+                                    <a class="btn btn-warning"
+                                       asp-area="Admin"
+                                       asp-controller="Orders"
+                                       asp-action="ChangeStatus"
+                                       asp-route-Status="3"
+                                       asp-route-Id="@item.Id">In Delivery</a>
+                                }
+                                @if (item.Status == 3)
+                                {
+                                    <a class="btn btn-success">Delivered</a>
                                 }
 
                             </td>

@@ -49,23 +49,6 @@ namespace FPTLongChau.Areas.Admin.Controllers
             return View(ordersDetail);
         }
 
-    
-
-        // GET: Admin/Orders/Edit/5
-        public async Task<IActionResult> Edit(Guid? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var order = await _context.Orders.FindAsync(id);
-            if (order == null)
-            {
-                return NotFound();
-            }
-            return View(order);
-        }
 
         // POST: Admin/Orders/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.

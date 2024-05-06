@@ -40,7 +40,7 @@
 							@Html.DisplayFor(modelItem => product.Title)
 						</a>
 						<p class="text-muted">
-							@Html.DisplayFor(modelItem => product.Category)
+							@Html.DisplayFor(modelItem => product.Category.Title)
 						</p>
 					</div>
 				</div>
@@ -50,9 +50,19 @@
 			<div class="me-4">
 				<div class="">
 					<div class="input-group" style="width: 120px;">
-						<button onclick="DecreaseItemQuantity(`@product.Id`)" class="btn btn-white border-secondary px-2 border" type="button">
-							<i class="fas fa-minus"></i>
-						</button>
+						@if(product.Quantity > 1)
+						{
+							<button onclick="DecreaseItemQuantity(`@product.Id`)" class="btn btn-white border-secondary px-2 border" type="button">
+								<i class="fas fa-minus"></i>
+							</button>
+						}
+						else
+						{
+							<button type="button" data-bs-toggle="modal" data-bs-target="#Modal-@product.Id"
+									 class="btn btn-white border-secondary px-2 border">
+								<i class="fas fa-minus"></i>
+							</button>
+						}
 						<input type="text" class="form-control border-secondary border text-center" value="@product.Quantity" disabled />
 						@if(product.Quantity < 10)
 						{
@@ -60,7 +70,6 @@
 								<i class="fas fa-plus"></i>
 							</button>
 						}
-
 					</div>
 				</div>
 			</div>
@@ -73,12 +82,71 @@
 				</small>
 			</div>
 		</div>
+
 		<div class="col-lg col-sm-6 d-flex justify-content-sm-center justify-content-md-start justify-content-lg-center justify-content-xl-end mb-2">
 			<div class="float-md-end">
-				<button onclick="RemoveItemFromCart(`@product.Id`)"
+				<button type="button" data-bs-toggle="modal" data-bs-target="#Modal-@product.Id"
 						class="btn btn-light text-danger icon-hover-danger border">
 					Remove
 				</button>
+			</div>
+		</div>
+
+	</div>
+	<!-- Modal -->
+	<div class="modal fade" id="Modal-@product.Id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="exampleModalLabel">Remove product</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="row gy-3 mb-4">
+						<div class="d-flex">
+							@if(product.Image != null)
+							{
+								<img src="https://pharmacitylongchau.blob.core.windows.net/imagecontainer/@Html.DisplayFor(modelItem => product.Image)"
+									 class="me-3 rounded border"
+									 style="width: 96px;
+                            height: 96px;"
+									 alt="@Html.DisplayFor(modelItem => product.Title)" />
+							}
+							else
+							{
+								<img src="~/img/default_image.jpg"
+									 class="me-3 rounded border"
+									 style="width: 96px;
+                            height: 96px;"
+									 alt="@Html.DisplayFor(modelItem => product.Title)" />
+							}
+							<div class="">
+								<div class="nav-link" title="@Html.DisplayFor(modelItem => product.Title)">
+									@{
+										if(product.Title.Length >= 30)
+										{
+											product.Title = product.Title.Substring(0, 30) + "...";
+										}
+									}
+									@Html.DisplayFor(modelItem => product.Title)
+								</div>
+								<p class="">
+									@Html.DisplayFor(modelItem => product.Category)
+								</p>
+								<text class="h6">$<span>@Html.DisplayFor(modelItem => product.TotalPrice)</span></text>
+								<br />
+								<small class="text-muted text-nowrap">
+									$@Html.DisplayFor(modelItem => product.Price) / per item
+								</small>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="RemoveItemFromCart(`@product.Id`)">Remove</button>
+				</div>
+
 			</div>
 		</div>
 	</div>

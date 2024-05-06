@@ -34,8 +34,6 @@ namespace FPTLongChau.Controllers
 		[HttpPost]
 		public async Task<ActionResult> ViewCart([FromBody] List<CartItem> cartItems)
 		{
-
-
 			var prodcuts = new List<CartItemViewModel>();
 			foreach(var item in cartItems)
 			{
@@ -138,6 +136,6 @@ namespace FPTLongChau.Controllers
 			ViewData["PayModeId"] = new SelectList(_context.PayModes, "Id", "Title");
 			return View("Purchase", order);
 		}
-
+	
 	}
 }
