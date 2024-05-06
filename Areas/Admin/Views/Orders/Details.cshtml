@@ -1,4 +1,4 @@
-﻿@model FPTLongChau.Areas.Admin.Models.Order
+﻿@model List<FPTLongChau.Areas.Admin.Models.OrderDetail>;
 
 @{
     ViewData["Title"] = "Details";
@@ -8,23 +8,65 @@
 
 <div>
     <h4>Order</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Time)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Time)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-    </dl>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table-bordered table" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Product Title</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @if (item.Product.Image != null)
+                                {
+                                    <img src="https://pharmacitylongchau.blob.core.windows.net/imagecontainer/@Html.DisplayFor(modelItem => item.Product.Image)"
+                                         width="100"
+                                         alt="@Html.DisplayFor(modelItem => item.Product.Image)" />
+                                }
+                                else
+                                {
+                                    <img src="~/img/default_image.jpg"
+                                         width="100"
+                                         alt="@Html.DisplayFor(modelItem => item.Product.Title)" />
+                                }
+                            </td>
+                            <td>@Html.DisplayFor(modelItem => item.Product.Title)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Product.Price)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+                            @{
+                                var totalePrice = item.Quantity * item.Product.Price;
+                            }
+                            <td>$@totalePrice</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
+
+@section Plugins {
+    <script src="~/Admin/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+}
+
+@section Scripts {
+    <script src="~/Admin/js/demo/datatables-demo.js"></script>
+}
+
+@section Styles {
+    <link href="~/Admin/vendor/datatables/dataTables.bootstrap4.min.css"
+          rel="stylesheet" />
+}
